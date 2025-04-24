@@ -170,27 +170,65 @@
         .load-more-btn:hover {
             background: #0051a3;
         }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            padding: 10px 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .nav-tab:hover {
+            background: #f0f0f0;
+        }
+        
+        .nav-tab.active {
+            background: #0071e3;
+            color: white;
+            border-color: #0071e3;
+        }
+        
+        .language-page {
+            display: none;
+        }
+        
+        .language-page.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <h1>Dubbing Quality Evaluation</h1>
     
+    <!-- Add language navigation -->
+    <nav class="nav-tabs">
+        <a href="#es" class="nav-tab active" data-lang="es">Spanish (es)</a>
+        <a href="#fr" class="nav-tab" data-lang="fr">French (fr)</a>
+        <a href="#pt" class="nav-tab" data-lang="pt">Portuguese (pt)</a>
+        <a href="#de" class="nav-tab" data-lang="de">German (de)</a>
+        <a href="#ja" class="nav-tab" data-lang="ja">Japanese (ja)</a>
+        <a href="#zh" class="nav-tab" data-lang="zh">Chinese (zh)</a>
+        <a href="#ar" class="nav-tab" data-lang="ar">Arabic (ar)</a>
+        <a href="#it" class="nav-tab" data-lang="it">Italian (it)</a>
+    </nav>
+
+    <!-- Modify the controls section -->
     <div class="controls">
         <h2>Controls</h2>
         <div>
-            <label for="language-select">Select Language:</label>
-            <select id="language-select">
-                <option value="all">All Languages</option>
-                <option value="es">Spanish (es)</option>
-                <option value="fr">French (fr)</option>
-                <option value="pt">Portuguese (pt)</option>
-                <option value="de">German (de)</option>
-                <option value="ja">Japanese (ja)</option>
-                <option value="zh">Chinese (zh)</option>
-                <option value="ar">Arabic (ar)</option>
-                <option value="it">Italian (it)</option>
-            </select>
-            
             <label for="video-select">Select Video:</label>
             <select id="video-select">
                 <option value="all">All Videos</option>
@@ -211,11 +249,23 @@
         <div id="status-message" style="margin-top: 10px; color: #0071e3;"></div>
     </div>
 
-    <div id="content">
-        <!-- Content will be dynamically populated based on selection -->
+    <!-- Create separate content divs for each language -->
+    <div id="all-content" class="language-page active">
+        <!-- Content for all languages will be loaded here -->
     </div>
-    
-    <div class="eval-form">
+    <div id="es-content" class="language-page">
+        <!-- Content for Spanish will be loaded here -->
+    </div>
+    <div id="fr-content" class="language-page">
+        <!-- Content for French will be loaded here -->
+    </div>
+    <!-- ... create similar divs for other languages ... -->
+
+    <div id="content">
+        <!-- Videos will be loaded here -->
+    </div>
+
+    <!-- <div class="eval-form">
         <h2>evaluation form</h2>
         <p>after watching the videos, please rate each provider on the following criteria:</p>
         
@@ -410,7 +460,7 @@
             <p>your responses have been recorded.</p>
             <pre id="form-data"></pre>
         </div>
-    </div>
+    </div> -->
 
     <script>
         const languages = ["es", "fr", "pt", "de", "ja", "zh", "ar", "it"];
@@ -768,30 +818,36 @@
             return container;
         }
         
-        function updateContent() {
-            const languageSelect = document.getElementById('language-select');
+        function switchLanguage(lang) {
+            // Update navigation tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.lang === lang);
+            });
+            
+            // Update content visibility
+            document.querySelectorAll('.language-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Update the content
+            updateContent(lang);
+        }
+        
+        function updateContent(selectedLang = 'es') {
             const videoSelect = document.getElementById('video-select');
             const contentDiv = document.getElementById('content');
             const statusMessage = document.getElementById('status-message');
             
-            const selectedLang = languageSelect.value;
+            if (!contentDiv) {
+                console.error('Content div not found');
+                return;
+            }
+            
             const selectedVideoId = videoSelect.value;
             
-            // limit initial load if showing all
-            const maxInitialVideos = 6;
-            let loadedVideos = 0;
+            statusMessage.textContent = `Loading videos for ${selectedLang}, ${selectedVideoId === 'all' ? 'all videos' : 'video ' + selectedVideoId}...`;
             
-            statusMessage.textContent = `Loading videos for ${selectedLang === 'all' ? 'all languages' : selectedLang}, ${selectedVideoId === 'all' ? 'all videos' : 'video ' + selectedVideoId}...`;
-            
-            // Update evaluation form dropdowns
-            if (selectedLang !== 'all') {
-                document.getElementById('eval-language').value = selectedLang;
-            }
-            
-            if (selectedVideoId !== 'all') {
-                document.getElementById('eval-video-id').value = selectedVideoId;
-            }
-            
+            // Clear existing content
             contentDiv.innerHTML = '';
             
             const languageNames = {
@@ -805,7 +861,7 @@
                 'it': 'Italian'
             };
             
-            const langsToShow = selectedLang === 'all' ? languages : [selectedLang];
+            const langsToShow = [selectedLang];
             
             langsToShow.forEach(lang => {
                 const langSection = document.createElement('div');
@@ -845,20 +901,6 @@
                 let hasAnyVideos = false;
                 
                 vidsToShow.forEach(videoId => {
-                    // only show first maxInitialVideos videos if showing all
-                    if (selectedVideoId === 'all' && loadedVideos >= maxInitialVideos) {
-                        const loadMoreBtn = document.createElement('button');
-                        loadMoreBtn.textContent = 'load more videos';
-                        loadMoreBtn.className = 'load-more-btn';
-                        loadMoreBtn.onclick = () => {
-                            loadedVideos = 0;
-                            updateContent();
-                        };
-                        contentDiv.appendChild(loadMoreBtn);
-                        return;
-                    }
-                    loadedVideos++;
-                    
                     const row = document.createElement('tr');
                     row.dataset.videoRow = `${lang}-${videoId}`;
                     
@@ -880,7 +922,7 @@
                         cell.appendChild(video);
                         
                         row.appendChild(cell);
-                        hasVideosInRow = true; // Assume video exists, error handler will hide if not
+                        hasVideosInRow = true;
                     });
                     
                     if (hasVideosInRow) {
@@ -897,16 +939,6 @@
                     contentDiv.appendChild(langSection);
                 }
             });
-            
-            // Remove empty sections after videos have had time to load
-            setTimeout(() => {
-                document.querySelectorAll('.language-section').forEach(section => {
-                    const tables = section.querySelectorAll('table');
-                    if (tables.length === 0) {
-                        section.remove();
-                    }
-                });
-            }, 500);
         }
         
         // Sync play/pause functionality
@@ -928,46 +960,39 @@
             });
         });
         
-        // Update content when selections change
-        document.getElementById('language-select').addEventListener('change', updateContent);
-        document.getElementById('video-select').addEventListener('change', updateContent);
-        
-        // Evaluation form submission
-        document.getElementById('evaluation-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Collect form data
-            const formData = new FormData(this);
-            const formObj = {};
-            
-            for (const [key, value] of formData.entries()) {
-                formObj[key] = value;
-            }
-            
-            // Add timestamp
-            formObj.timestamp = new Date().toISOString();
-            
-            // Display the collected data (in a real application, you would send this to a server)
-            const formResult = document.getElementById('form-result');
-            const formDataDisplay = document.getElementById('form-data');
-            
-            formDataDisplay.textContent = JSON.stringify(formObj, null, 2);
-            formResult.classList.remove('hidden');
-            
-            // Scroll to the result
-            formResult.scrollIntoView({ behavior: 'smooth' });
-            
-            // In a real application, you would send this data to your server
-            console.log('Form data:', formObj);
-            
-            // Reset the form after successful submission
-            this.reset();
+        // Update event listeners
+        document.getElementById('video-select').addEventListener('change', function() {
+            const activeTab = document.querySelector('.nav-tab.active');
+            const selectedLang = activeTab ? activeTab.dataset.lang : 'es';
+            updateContent(selectedLang);
         });
-        
-        // Initial content load
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = tab.dataset.lang;
+                
+                // Update active tab
+                document.querySelectorAll('.nav-tab').forEach(t => {
+                    t.classList.toggle('active', t === tab);
+                });
+                
+                // Update URL hash
+                window.location.hash = lang;
+                
+                // Update content
+                updateContent(lang);
+            });
+        });
+
+        // Initial load
         window.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM fully loaded, initializing content...');
-            updateContent();
+            const initialLang = window.location.hash.slice(1) || 'es';
+            const tab = document.querySelector(`.nav-tab[data-lang="${initialLang}"]`);
+            if (tab) {
+                tab.classList.add('active');
+            }
+            updateContent(initialLang);
         });
     </script>
 </body>
