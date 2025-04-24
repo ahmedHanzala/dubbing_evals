@@ -145,6 +145,31 @@
         .submit-btn:hover {
             background-color: #248a3d;
         }
+        .video-container {
+            background: #f5f5f7;
+            border-radius: 4px;
+        }
+        
+        .loader {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .load-more-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .load-more-btn:hover {
+            background: #0051a3;
+        }
     </style>
 </head>
 <body>
@@ -689,19 +714,58 @@
             
             if (!videoPath) {
                 const errorMessage = document.createElement('p');
-                errorMessage.textContent = 'This video is not available.';
+                errorMessage.textContent = 'this video is not available.';
                 return errorMessage;
             }
             
-            // Create iframe for Google Drive videos
-            const iframe = document.createElement('iframe');
-            iframe.src = videoPath;
-            iframe.allowFullscreen = true;
-            iframe.dataset.provider = provider;
-            iframe.dataset.videoId = videoId;
-            iframe.dataset.lang = lang;
+            // create a container for the video
+            const container = document.createElement('div');
+            container.className = 'video-container';
+            container.style.position = 'relative';
+            container.style.minHeight = '250px'; // match iframe height
             
-            return iframe;
+            // add loading indicator
+            const loader = document.createElement('div');
+            loader.className = 'loader';
+            loader.innerHTML = 'loading video...';
+            loader.style.position = 'absolute';
+            loader.style.top = '50%';
+            loader.style.left = '50%';
+            loader.style.transform = 'translate(-50%, -50%)';
+            container.appendChild(loader);
+            
+            // lazy load the iframe
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // create and add iframe when visible
+                        const iframe = document.createElement('iframe');
+                        iframe.src = videoPath;
+                        iframe.allowFullscreen = true;
+                        iframe.dataset.provider = provider;
+                        iframe.dataset.videoId = videoId;
+                        iframe.dataset.lang = lang;
+                        iframe.style.width = '100%';
+                        iframe.style.height = '250px';
+                        iframe.style.border = '0';
+                        
+                        // remove loader when iframe loads
+                        iframe.onload = () => {
+                            loader.remove();
+                        };
+                        
+                        container.appendChild(iframe);
+                        observer.disconnect(); // stop observing once loaded
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '50px', // start loading when within 50px of viewport
+                threshold: 0
+            });
+            
+            observer.observe(container);
+            return container;
         }
         
         function updateContent() {
@@ -712,6 +776,10 @@
             
             const selectedLang = languageSelect.value;
             const selectedVideoId = videoSelect.value;
+            
+            // limit initial load if showing all
+            const maxInitialVideos = 6;
+            let loadedVideos = 0;
             
             statusMessage.textContent = `Loading videos for ${selectedLang === 'all' ? 'all languages' : selectedLang}, ${selectedVideoId === 'all' ? 'all videos' : 'video ' + selectedVideoId}...`;
             
@@ -777,6 +845,20 @@
                 let hasAnyVideos = false;
                 
                 vidsToShow.forEach(videoId => {
+                    // only show first maxInitialVideos videos if showing all
+                    if (selectedVideoId === 'all' && loadedVideos >= maxInitialVideos) {
+                        const loadMoreBtn = document.createElement('button');
+                        loadMoreBtn.textContent = 'load more videos';
+                        loadMoreBtn.className = 'load-more-btn';
+                        loadMoreBtn.onclick = () => {
+                            loadedVideos = 0;
+                            updateContent();
+                        };
+                        contentDiv.appendChild(loadMoreBtn);
+                        return;
+                    }
+                    loadedVideos++;
+                    
                     const row = document.createElement('tr');
                     row.dataset.videoRow = `${lang}-${videoId}`;
                     
