@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubbing Evaluation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f7;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .video-box {
+            width: 30%;
+            min-width: 300px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+        .video-box h3 {
+            padding: 10px 15px;
+            margin: 0;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+        .video-box video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        select, button, input, textarea {
+            padding: 8px 12px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #0071e3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0051a3;
+        }
+        .hidden {
+            display: none;
+        }
+        .language-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 20px;
+        }
+        .comparison-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .comparison-grid th, .comparison-grid td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .comparison-grid th {
+            background-color: #f0f0f0;
+            position: sticky;
+            top: 0;
+        }
+        .comparison-grid iframe {
+            width: 100%;
+            height: 250px;
+            display: block;
+            margin: 0 auto;
+            border: 0;
+        }
+        .video-cell {
+            vertical-align: top;
+            min-width: 350px;
+        }
+        .video-row-label {
+            font-weight: bold;
+            background-color: #f5f5f7;
+        }
+        .eval-form {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .rating-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .rating-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 100px;
+        }
+        .submit-btn {
+            background-color: #34c759;
+        }
+        .submit-btn:hover {
+            background-color: #248a3d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dubbing Quality Evaluation</h1>
+    
+    <div class="controls">
+        <h2>Controls</h2>
+        <div>
+            <label for="language-select">Select Language:</label>
+            <select id="language-select">
+                <option value="all">All Languages</option>
+                <option value="es">Spanish (es)</option>
+                <option value="fr">French (fr)</option>
+                <option value="pt">Portuguese (pt)</option>
+                <option value="de">German (de)</option>
+                <option value="ja">Japanese (ja)</option>
+                <option value="zh">Chinese (zh)</option>
+                <option value="ar">Arabic (ar)</option>
+                <option value="it">Italian (it)</option>
+            </select>
+            
+            <label for="video-select">Select Video:</label>
+            <select id="video-select">
+                <option value="all">All Videos</option>
+                <option value="0">Video 0</option>
+                <option value="1">Video 1</option>
+                <option value="2">Video 2</option>
+                <option value="3">Video 3</option>
+                <option value="4">Video 4</option>
+                <option value="5">Video 5</option>
+                <option value="6">Video 6</option>
+                <option value="7">Video 7</option>
+                <option value="8">Video 8</option>
+            </select>
+            
+            <button id="sync-play-btn">Play All Simultaneously</button>
+            <button id="sync-pause-btn">Pause All</button>
+        </div>
+        <div id="status-message" style="margin-top: 10px; color: #0071e3;"></div>
+    </div>
+
+    <div id="content">
+        <!-- Content will be dynamically populated based on selection -->
+    </div>
+    
+    <div class="eval-form">
+        <h2>evaluation form</h2>
+        <p>after watching the videos, please rate each provider on the following criteria:</p>
+        
+        <form id="evaluation-form">
+            <div class="form-group">
+                <label for="evaluator-name">your name:</label>
+                <input type="text" id="evaluator-name" name="evaluator-name" required>
+            </div>
+            
+            <div class="form-group">
+                <label>language being evaluated:</label>
+                <select id="eval-language" name="eval-language" required>
+                    <option value="">-- select language --</option>
+                    <option value="es">spanish (es)</option>
+                    <option value="fr">french (fr)</option>
+                    <option value="pt">portuguese (pt)</option>
+                    <option value="de">german (de)</option>
+                    <option value="ja">japanese (ja)</option>
+                    <option value="zh">chinese (zh)</option>
+                    <option value="ar">arabic (ar)</option>
+                    <option value="it">italian (it)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>video id being evaluated:</label>
+                <select id="eval-video-id" name="eval-video-id" required>
+                    <option value="">-- select video --</option>
+                    <option value="0">video 0</option>
+                    <option value="1">video 1</option>
+                    <option value="2">video 2</option>
+                    <option value="3">video 3</option>
+                    <option value="4">video 4</option>
+                    <option value="5">video 5</option>
+                    <option value="6">video 6</option>
+                    <option value="7">video 7</option>
+                    <option value="8">video 8</option>
+                </select>
+            </div>
+            
+            <h3>PROVIDER_3</h3>
+            <div class="rating-group">
+                <div class="rating-item">
+                    <label>voice quality (1-5):</label>
+                    <select name="PROVIDER_3-voice-quality">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+                
+                <div class="rating-item">
+                    <label>accent authenticity (1-5):</label>
+                    <select name="PROVIDER_3-accent">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+                
+                <div class="rating-item">
+                    <label>lip sync (1-5):</label>
+                    <select name="PROVIDER_3-lip-sync">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+            </div>
+            
+            <h3>PROVIDER_1</h3>
+            <div class="rating-group">
+                <div class="rating-item">
+                    <label>voice quality (1-5):</label>
+                    <select name="PROVIDER_1-voice-quality">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+                
+                <div class="rating-item">
+                    <label>accent authenticity (1-5):</label>
+                    <select name="PROVIDER_1-accent">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+                
+                <div class="rating-item">
+                    <label>lip sync (1-5):</label>
+                    <select name="PROVIDER_1-lip-sync">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+            </div>
+            
+            <h3>PROVIDER_2</h3>
+            <div class="rating-group">
+                <div class="rating-item">
+                    <label>voice quality (1-5):</label>
+                    <select name="PROVIDER_2-voice-quality">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+                
+                <div class="rating-item">
+                    <label>accent authenticity (1-5):</label>
+                    <select name="PROVIDER_2-accent">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+                
+                <div class="rating-item">
+                    <label>lip sync (1-5):</label>
+                    <select name="PROVIDER_2-lip-sync">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>overall ranking (best to worst):</label>
+                <select name="ranking-1" required>
+                    <option value="">-- select 1st place --</option>
+                    <option value="PROVIDER_3">PROVIDER_3</option>
+                    <option value="PROVIDER_1">PROVIDER_1</option>
+                    <option value="PROVIDER_2">PROVIDER_2</option>
+                </select>
+                <select name="ranking-2" required>
+                    <option value="">-- select 2nd place --</option>
+                    <option value="PROVIDER_3">PROVIDER_3</option>
+                    <option value="PROVIDER_1">PROVIDER_1</option>
+                    <option value="PROVIDER_2">PROVIDER_2</option>
+                </select>
+                <select name="ranking-3" required>
+                    <option value="">-- select 3rd place --</option>
+                    <option value="PROVIDER_3">PROVIDER_3</option>
+                    <option value="PROVIDER_1">PROVIDER_1</option>
+                    <option value="PROVIDER_2">PROVIDER_2</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="comments">additional comments:</label>
+                <textarea id="comments" name="comments"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="submit-btn">submit evaluation</button>
+            </div>
+        </form>
+        
+        <div id="form-result" class="hidden">
+            <h3>thank you for your evaluation!</h3>
+            <p>your responses have been recorded.</p>
+            <pre id="form-data"></pre>
+        </div>
+    </div>
+
+    <script>
+        const languages = ["es", "fr", "pt", "de", "ja", "zh", "ar", "it"];
+        const providers = ["PROVIDER_1", "PROVIDER_2", "PROVIDER_3"];
+        const videoIds = Array.from({length: 9}, (_, i) => i);
+        
+        function getVideoPath(provider, videoId, lang) {
+            // map of video keys to google drive file ids
+            const driveFileIds = {
+                // format: 'provider_video_id_lang': 'driveid'
+                // replace these with your actual google drive file ids
+                // example:
+                'PROVIDER_1_video_0_ar.mp4': '1rYCIeQwTFP7SkEE2r0Z0ALOx1MGUJugV',
+                'PROVIDER_1_video_1_ar.mp4': '1Q5f7wy62ZsJneFdi7h_shXhg-hIsjRmj',
+                'PROVIDER_1_video_2_ar.mp4': '1Hh1BFouiE0MliL68kSW3NTa3tHGiOzXG',
+                'PROVIDER_1_video_3_ar.mp4': '1aXjb88EqQAPo1cWv6pa5q9XIZOVvemnD',
+                'PROVIDER_1_video_4_ar.mp4': '1frdJmy-dHTAGfCAHcaqxfTOTe_EJRPhh',
+                'PROVIDER_1_video_6_ar.mp4': '1flD3iYTcB-299M9th4D16wmej4b7pbR-',
+                'PROVIDER_1_video_7_ar.mp4': '1qUV0eKzEQlVAvXXcfBeH4Q-AYBemRwoF',
+                'PROVIDER_1_video_8_ar.mp4': '18B7shlObylQRovZVbqs2RUEN06kKV8L0',
+                'PROVIDER_2_video_0_ar.mp4': '1qNKkgbPl32C2s1ipP8GOrZZNIocw-uhu',
+                'PROVIDER_2_video_1_ar.mp4': '1tbcqxRP5ZoOg4cBd0ypXbHrd25sw3SjI',
+                'PROVIDER_2_video_2_ar.mp4': '1-o06nnZ34-st_5VETquu_D1lp-B1fvMv',
+                'PROVIDER_2_video_3_ar.mp4': '1_wcPFGgR8shW-agjrnfqZ-PrGZ-14mP7',
+                'PROVIDER_2_video_4_ar.mp4': '1Adr4RrBCumpgxdml-_kChnPwl-Urs0xc',
+                'PROVIDER_2_video_5_ar.mp4': '17KWjtyXpTEwvgfSZX5bxnY-S5f5oYkLI',
+                'PROVIDER_2_video_6_ar.mp4': '1ureKBIQWgtKZTxilj76iEapxN9mpSFA3',
+                'PROVIDER_2_video_7_ar.mp4': '1JSLINn9RJJj97LzTLn0ZbkatKLc5GUU6',
+                'PROVIDER_2_video_8_ar.mp4': '1g823fNA4cNKpoI0qkK_QPCDtBEkI4rB_',
+                'PROVIDER_3_video_0_ar.mp4': '15E6CY7aFwn1EAuauIyKE-yRfAt_qmfIy',
+                'PROVIDER_3_video_1_ar.mp4': '1214L8jWNEGbwhQd2OAwnsqxlgjW7w9Iq',
+                'PROVIDER_3_video_2_ar.mp4': '1NzyH9931p2RaI3EO4g7V3ZKpLD4VcEPr',
+                'PROVIDER_3_video_3_ar.mp4': '1ICVpbtizRiB_ytWAcKvwIY3mvCmMZi1D',
+                'PROVIDER_3_video_4_ar.mp4': '1qljY0Te-yTSvOB2HzK2siRmxRziFy11P',
+                'PROVIDER_3_video_5_ar.mp4': '1013U2wjuusJDWs9t9GmIdfMEV7HV6etW',
+                'PROVIDER_3_video_6_ar.mp4': '1Xrl--iXOGgni7P5KjxzV5yqK-Kb6m8bo',
+                'PROVIDER_3_video_7_ar.mp4': '1_2NLCIVHf1xxJlWOXkQgg1bmuZQtQDux',
+                'PROVIDER_3_video_8_ar.mp4': '1_2NLCIVHf1xxJlWOXkQgg1bmuZQtQDux',
+
+                'PROVIDER_1_video_0_de.mp4': '1GmwJyZUBJViCuXFEWS2UJU5mKkBO0Dso',
+                'PROVIDER_1_video_1_de.mp4': '1v6HNDSAlE3kd6Qa92T1BYTkg9ycLA6a9',
+                'PROVIDER_1_video_2_de.mp4': '1vawTqcjgpvH7QxpReFbNXPquV_ZoAucO',
+                'PROVIDER_1_video_4_de.mp4': '1JycIr6zdSqMHhCIq-5uxw5BnXw7CwR3v',
+                'PROVIDER_1_video_6_de.mp4': '1oDfooj9SpkPy9_bBvcJZ5MrnoCP9NK32',
+                'PROVIDER_1_video_8_de.mp4': '1wC2oPC6MDH-7U-gLGAv4qD5jA4CpyqoK',
+
+                'PROVIDER_2_video_0_de.mp4': '1xz9evVOfg4Vv6vmWQmsdRlWd6uaJYjhw',
+                'PROVIDER_2_video_2_de.mp4': '1FkcIG7axFBZsqvTzB7ihY72bK6F0nQIW',
+                'PROVIDER_2_video_4_de.mp4': '1HqEgaJHFq16iM1Rqn43HVY87X716RHd-',
+                'PROVIDER_2_video_6_de.mp4': '1xkrO9n_iUt57Hp1kHCL6HHUIaZBRvd8_',
+                'PROVIDER_2_video_7_de.mp4': '1rhs-C-dtaXXFaJw8BA2lDS-rNrno4uAC',
+                'PROVIDER_2_video_8_de.mp4': '1XvhK2mMjsN0ad9Tyi-mu511DboPLXzfV',
+
+                'PROVIDER_3_video_0_de.mp4': '1IvWABhysgzaoG-sd6bZhfgpcFLrZqQYJ',
+                'PROVIDER_3_video_4_de.mp4': '1unO3_ddBqHZYtztmSlTbzy4x0qCoDi-5',
+                'PROVIDER_3_video_5_de.mp4': '1xZ0Jb8mikjAi4Po0ZFF3_maPbmCLkxo9',
+                'PROVIDER_3_video_6_de.mp4': '1UqDHdHE2nKN-bP6y6H9825A4jA1G6EiO',
+                'PROVIDER_3_video_7_de.mp4': '1RNag2kxZVzxQgm_qkzZ57qNGeFchhPBS',
+                'PROVIDER_3_video_8_de.mp4': '14UROZITC0_XjbTHJsYdmvnBHhjz8fps1',
+
+                'PROVIDER_3_video_8_de.mp4': '14UROZITC0_XjbTHJsYdmvnBHhjz8fps1',
+
+                'PROVIDER_1_video_0_es.mp4': '1xRYG3YW-QcW_6yGruAaSSyjuit_lzMoE',
+                'PROVIDER_1_video_2_es.mp4': '1Pnjl1LiOoHcWetQwrVD2jtW573VzjrlG',
+                'PROVIDER_1_video_3_es.mp4': '1rG1YrxisddFhwaUCc5tohYBmV8OUA7tl',
+                'PROVIDER_1_video_4_es.mp4': '1UkQ8qi8xA5KKUea-RaAwV_URdEzoL7CC',
+                'PROVIDER_1_video_6_es.mp4': '1dYSnug4rO8Omltxa5rKp6oEVSaib0OfM',
+                'PROVIDER_1_video_8_es.mp4': '1GM3a-mefv5bp2s5R5cXuTWkQJm-oDkOF',
+
+                'PROVIDER_2_video_0_es.mp4': '1XwYpz1QmQ3ipotIGRwdci9IKbJiBAXPq',
+                'PROVIDER_2_video_2_es.mp4': '1agBdYNUZG8_hCBf49oHn05WgCNWLNsMU',
+                'PROVIDER_2_video_4_es.mp4': '11RKOxy4RmS4jEaWhfdLAIT_niitYrFWx',
+                'PROVIDER_2_video_5_es.mp4': '1joU1DDPznCWl6RnVqF9uS5_MWENSta-J',
+                'PROVIDER_2_video_6_es.mp4': '1iCpjCdfyFz4psJEHJrLF3jMeQmZgZv4D',
+                'PROVIDER_2_video_8_es.mp4': '12JjAwh3VqxZTb2t9rZITcIor7s1CrJx2',
+
+                'PROVIDER_3_video_0_es.mp4': '1bNfKsqpXvFz8Duathnr16NkJ81qY0Qu9',
+                'PROVIDER_3_video_2_es.mp4': '1hyeUxKsW_SsyF5PNbSh5sqtLOYJgKSTV',
+                'PROVIDER_3_video_4_es.mp4': '1dk68GRqCp8Y4qaVWUcbn4QIJ42uQzUed',
+                'PROVIDER_3_video_6_es.mp4': '1MrmlOfvQ4QmmY9MNP70hIhK01mvxY9oj',
+                'PROVIDER_3_video_7_es.mp4': '12KvXcx8QOZ0Kgg8aPtgmxJYWiDy5C6sE',
+                'PROVIDER_3_video_8_es.mp4': '1mEmPTSNGMsBFh_RZx-Bv9mzMc8AhRa2N',
+
+                'PROVIDER_3_video_7_es.mp4': '12KvXcx8QOZ0Kgg8aPtgmxJYWiDy5C6sE',
+                'PROVIDER_3_video_8_es.mp4': '1mEmPTSNGMsBFh_RZx-Bv9mzMc8AhRa2N',
+
+
+                'PROVIDER_2_video_7_it.mp4': '1zyaly8BzagLKTN-CO0ApemzVAjNM6NL6',
+                'PROVIDER_2_video_8_it.mp4': '1GHEIJRvfi_ktYv_k7C4yhmLOH8iHMgcH',
+
+                'PROVIDER_3_video_0_it.mp4': '1u4DdnnHb4RL8RXCqrENkIIpMANoOxgFn',
+                'PROVIDER_3_video_1_it.mp4': '15POzF1HO-UKcyWQczVPDTQMMm7axrTwX',
+                'PROVIDER_3_video_2_it.mp4': '1xBKyZ0gNwZhEcDDamitl67lNn7c8zR1x',
+                'PROVIDER_3_video_3_it.mp4': '1msSEY3z-7sHenLkeJOhlIq0-USjyHJn1',
+                'PROVIDER_3_video_4_it.mp4': '1HTWz60aAMlNUFfNz03fcVTz9bJ4WwNza',
+                'PROVIDER_3_video_5_it.mp4': '1ua13fRLIopyvLKUq0bnKA83btY6cCBJb',
+                'PROVIDER_3_video_6_it.mp4': '1EoGbUgw54LCGhGuog5FeCaW5F1yL2GGY',
+                'PROVIDER_3_video_7_it.mp4': '1wOMmb11B9Is-C3dqS4gnYRSmB8XwSqVG',
+                'PROVIDER_3_video_8_it.mp4': '191hkiuVhDrON392jENsxkldacl97XPP9',
+
+
+                'PROVIDER_2_video_0_it.mp4': '18nNfax2VHojvAd_QCPKe3YtkxcUJlHrK',
+                'PROVIDER_2_video_1_it.mp4': '1WYeIeyF8yvoZujmYQU8Fl5XN5ZGCMP3Z',
+                'PROVIDER_2_video_2_it.mp4': '1di9hJ9S3u8G20TIEfiSnCpJqPmAWEwXi',
+                'PROVIDER_2_video_3_it.mp4': '1xPX9W6kSHXEbu49RT3aMHjY08wWO6sNB',
+                'PROVIDER_2_video_4_it.mp4': '1f3FNcO6pgUS5-r73I5WoBWMwMT3pbIXb',
+                'PROVIDER_2_video_5_it.mp4': '1WYFtWp3oQeT9H1gXG24CrX3P_aNj7Uvb',
+                'PROVIDER_2_video_6_it.mp4': '1nl335VXu7JDXdvZh2oD4eh6qSu4KDKiu',
+                'PROVIDER_2_video_8_it.mp4': '1GHEIJRvfi_ktYv_k7C4yhmLOH8iHMgcH',
+
+                'PROVIDER_3_video_0_it.mp4': '1u4DdnnHb4RL8RXCqrENkIIpMANoOxgFn',
+                'PROVIDER_3_video_1_it.mp4': '15POzF1HO-UKcyWQczVPDTQMMm7axrTwX',
+                'PROVIDER_3_video_2_it.mp4': '1xBKyZ0gNwZhEcDDamitl67lNn7c8zR1x',
+                'PROVIDER_3_video_3_it.mp4': '1msSEY3z-7sHenLkeJOhlIq0-USjyHJn1',
+                'PROVIDER_3_video_4_it.mp4': '1HTWz60aAMlNUFfNz03fcVTz9bJ4WwNza',
+                'PROVIDER_3_video_5_it.mp4': '1ua13fRLIopyvLKUq0bnKA83btY6cCBJb',
+                'PROVIDER_3_video_6_it.mp4': '1EoGbUgw54LCGhGuog5FeCaW5F1yL2GGY',
+                'PROVIDER_3_video_7_it.mp4': '1wOMmb11B9Is-C3dqS4gnYRSmB8XwSqVG',
+                'PROVIDER_3_video_8_it.mp4': '191hkiuVhDrON392jENsxkldacl97XPP9',
+
+
+
+                'PROVIDER_1_video_0_ja.mp4': '1cJcd-sebybO1JPhNBmd2P-6iFAhIR2Em',
+                'PROVIDER_1_video_1_ja.mp4': '1f6wzJMi8vuYYz1PXAqkr-IliLAbHdPoV',
+                'PROVIDER_1_video_2_ja.mp4': '109R6xomgaFesJrewWxGQ7BAMcFGN_VC_',
+                'PROVIDER_1_video_3_ja.mp4': '1obIAwNCj6R0iQKy1iqH18SqKDx7hz07-',
+                'PROVIDER_1_video_4_ja.mp4': '1peRCY6zvV9JllekS17if3fk5u-3GJXLY',
+                'PROVIDER_1_video_5_ja.mp4': '1qs7TpC4p89CqJyWKw9DtMe3CdBtF9u_q',
+                'PROVIDER_1_video_6_ja.mp4': '17hqF9YFMLMIeSBZwQ4xCsxtWkZ8CLAA_',
+                'PROVIDER_1_video_7_ja.mp4': '1p1sA041ZfQtm-6MMVU32aN8gRXAG3TVH',
+                'PROVIDER_1_video_8_ja.mp4': '1FRWpt905s3MtTwNNx3LUv-vnsIk0vUjF',
+
+                'PROVIDER_2_video_1_ja.mp4': '1t9ELj9Azx-1gxAeuqZeO24JI6NU3o8yp',
+                'PROVIDER_2_video_2_ja.mp4': '1Onxe5i2oK_NoTUcb_uzVHPEhqxAhtG0_',
+                'PROVIDER_2_video_3_ja.mp4': '1UkAJghJ3sNhtUlRhga2WRVqb88R0BZcP',
+                'PROVIDER_2_video_4_ja.mp4': '1YpAUyQzySJ8yD7X9X29NrYG5UnMsG7ny',
+                'PROVIDER_2_video_5_ja.mp4': '1ikg2YBQXeSA0ekm99XXMBF1v61FvSLb-',
+                'PROVIDER_2_video_6_ja.mp4': '1cJGoUtCfYocJq4mgq41E1hWVgkTiR1vG',
+                'PROVIDER_2_video_7_ja.mp4': '1U3q1QDbLnDBhXhaSb8gdI7Clo01k6HAM',
+                'PROVIDER_2_video_8_ja.mp4': '1RU3BcRlcB3P8HIrmFNBTJMdpcod55f-g',
+
+                'PROVIDER_3_video_0_ja.mp4': '1L-4uj89i6MRV3AFLZKeD7skVa8wKM0rP',
+                'PROVIDER_3_video_1_ja.mp4': '1CIki-oHcPUigQ8tCpp9eBPx84FTLibQq',
+                'PROVIDER_3_video_2_ja.mp4': '1mMdGi0eRtSQL9I_xKv7fxN1BwojSpFqz',
+                'PROVIDER_3_video_3_ja.mp4': '1uauVl6YXyuVQ-XG6fLnpNEIum6TVQvmF',
+                'PROVIDER_3_video_4_ja.mp4': '1wqiiwB8Fm55Uv_eYBDHgtHly8aBaVm5T',
+                'PROVIDER_3_video_6_ja.mp4': '1wqiiwB8Fm55Uv_eYBDHgtHly8aBaVm5T',
+                'PROVIDER_3_video_7_ja.mp4': '1aMCzNxfSwsMRcXmKUmMO0DRgkfCqBIsC',
+                'PROVIDER_3_video_8_ja.mp4': '1DMhEKxg9QsF-7pDXC3nOj11rLnb9PqrT',
+
+
+                'PROVIDER_1_video_1_pt.mp4': '1VskT2uL68NxNv_H_sVDNG4lsiBmX3TyF',
+                'PROVIDER_1_video_0_pt.mp4': '1GIbDQKz8GS2iyJyZTyLWqlvwc-h4ifPG',
+                'PROVIDER_1_video_2_pt.mp4': '1G-Xn-3kIeFlCW39CwIrhPs-W5GnEOb5D',
+                'PROVIDER_1_video_3_pt.mp4': '1grINkR1HOJbrdQSZ74G9MSII8oKr434D',
+
+                'PROVIDER_1_video_4_pt.mp4': '1Yq0XS0Ac5Cb1YnXjnv7xGATzdLbyV_j5',
+
+                'PROVIDER_1_video_5_pt.mp4': '1CHllvMNlAFABzzXL1QrFd7XbPROBHRta',
+
+                'PROVIDER_1_video_6_pt.mp4': '1lwqOpl7YZABoz-nqlurFhwZ6ZfgVWOvk',
+
+                'PROVIDER_1_video_7_pt.mp4': '1-Sg0wttdrat2_2ygcXRKpucrVtw52v6t',
+
+                'PROVIDER_1_video_8_pt.mp4': '1G5avAUgxQNN2yyF3O50kDzNwp9KTrgdY',
+
+                'PROVIDER_2_video_0_pt.mp4': '14Mxa4Dd5C7p-wlN5X49_nBNIlFRMKNgI',
+
+                'PROVIDER_2_video_1_pt.mp4': '1oiCm2uTlv_d6UFnEzAkOGEDwLfrurawj',
+
+                'PROVIDER_2_video_2_pt.mp4': '1W8SgRots9U2EYzeC67Mos_UZSZU62NxZ',
+
+                'PROVIDER_2_video_3_pt.mp4': '1lbV3QDWhqIrR9l-bqSxhM1IxyLB12ZCz',
+
+                'PROVIDER_2_video_4_pt.mp4': '1_8gZrzfDFI_yLGveQ8dZ5spJqa-HsL_v',
+
+                'PROVIDER_2_video_5_pt.mp4': '1xGWLXcIRWbWN6qLIGXks82E839HntlhI',
+
+                'PROVIDER_2_video_6_pt.mp4': '1Nr0USr6zHgUg6Ln6lrjJulZKdppZrwwN',
+
+                'PROVIDER_2_video_7_pt.mp4': '1FtDFVYz1bdUYn9HK6yMVjkQfdyHa0gpZ',
+
+                'PROVIDER_2_video_8_pt.mp4': '151wLIs9atf40QLCJZkKYNinb6acBYX2l',
+
+                'PROVIDER_3_video_0_pt.mp4': '1ND9PgHONuXw6slWUlez8lqYiBoJX9NG4',
+
+                'PROVIDER_3_video_1_pt.mp4': '1-k2SNiKtkOI2L0tmZMgztLBHY8k7uUdN',
+
+                'PROVIDER_3_video_2_pt.mp4': '1oNeqnbrzAuEUSclfmpFgJEqsrL2dbhPe',
+
+                'PROVIDER_3_video_3_pt.mp4': '1Vrvk8h64PHVeu-5DJv6b8xEnNuHcJpfb',
+
+                'PROVIDER_3_video_4_pt.mp4': '1YnsDMZgk9__cMyT6LQy5qUcpXKCpUT4D',
+
+                'PROVIDER_3_video_5_pt.mp4': '1u9-K57I6EYZiYy1AbmB5LRhHCE1vwVU1',
+
+                'PROVIDER_3_video_6_pt.mp4': '1Nddu4CCJ5s0fNMuR5-V-7LEMoChjw-zi',
+
+                'PROVIDER_3_video_7_pt.mp4': '15Cg8_eHLqr8FVlt6PSqgsGD0hPvJjrl1',
+
+                'PROVIDER_3_video_8_pt.mp4': '1SWIx396xtYDrYDqE1nvYD_Gq3i5_OGAK',
+
+
+                'PROVIDER_1_video_3_zh.mp4': '1ZesH0ykBZ6zUNSPfbsDWT3Fpl_DMpjRP',
+
+                'PROVIDER_1_video_0_zh.mp4': '16lDf5y8Vw9XbL0inaqE_6gPwFcAjCcXS',
+
+                'PROVIDER_1_video_1_zh.mp4': '1wiu69IMwQjian2ZwQJue6xxto_Bn_KpS',
+
+                'PROVIDER_1_video_2_zh.mp4': '1oV170Py9mHNqGNVgVrJ04TAr6M-hwSPw',
+
+                'PROVIDER_1_video_4_zh.mp4': '123-gjYYcVTjV-11dj7HEWtKpcGt-Cl8c',
+
+                'PROVIDER_1_video_5_zh.mp4': '1wluT2iqKF3AvU9VAKGbJ8b0oXu2db07Y',
+
+                'PROVIDER_1_video_6_zh.mp4': '1n6GDG45qhYuP_oaUVX2jahzh-Ij7ULL_',
+
+                'PROVIDER_1_video_7_zh.mp4': '1A1shbU1jgphWHRnEjCPPj7JUlKFTC1b6',
+
+                'PROVIDER_1_video_8_zh.mp4': '1e8uZiYTrtRZ7dTqpBGG5zpHRJH72NJET',
+
+                'PROVIDER_2_video_0_zh.mp4': '1lj2KNaSmsK3DaLtBBmBV80eSec_MYlBO',
+
+                'PROVIDER_2_video_1_zh.mp4': '1DfAeIGzfcya2YFOwwV6QqHa_SO6AOEC5',
+
+                'PROVIDER_2_video_2_zh.mp4': '1qEODZs8md9FcciIK3BO3ShdZ5nh34J2a',
+
+                'PROVIDER_2_video_3_zh.mp4': '1DDMK0RMOW_UyBRLk5lRsS9tLhaFPdzjX',
+
+                'PROVIDER_2_video_4_zh.mp4': '14jBl4OiU2y125FhZXrmKUkbK2xlhaEig',
+
+                'PROVIDER_2_video_5_zh.mp4': '1WqO6sssdhg3wCcJgfLYpL1p7javWfWcG',
+
+                'PROVIDER_2_video_6_zh.mp4': '1F_jpyVEsvU1QiLeApIAugxgCEUU9iCFm',
+
+                'PROVIDER_2_video_7_zh.mp4': '1FqDck9qMZK5bPWinzGTw3QYofo0wNea_',
+
+                'PROVIDER_2_video_8_zh.mp4': '1dOAlpdSuz3tDFaCpNHf_VJZn2n3XsOKX',
+
+                'PROVIDER_3_video_0_zh.mp4': '1Td9EGk6owMCdLrCnzj8DwS1XV75PM36z',
+
+                'PROVIDER_3_video_1_zh.mp4': '1ld7xk97uY7N-exMqS1NE2FaiJWG8zNsQ',
+
+                'PROVIDER_3_video_2_zh.mp4': '1ReiYk40wNjAJ3CgrPiKded7os0a3imsv',
+
+                'PROVIDER_3_video_4_zh.mp4': '1WWxMDl5mB5PqhEq4CIz4iNYzdV29XKK_',
+
+                'PROVIDER_3_video_5_zh.mp4': '1J6SFHuhfQ5Gj-p9xROPhMRoIca4tsM74',
+
+                'PROVIDER_3_video_6_zh.mp4': '1KcwB045wzhuUD70h9gTZqfBJqPOX8nTA',
+
+                'PROVIDER_3_video_7_zh.mp4': '1fL2v6zwRjK8dLJfHdrgfbZgigkF3bAkC',
+
+                'PROVIDER_3_video_8_zh.mp4': '1UUZ4vRKUfo7L1r2GcsjDNGNf3PDOlwEu',
+
+            };
+            
+            const videoKey = `${provider}_video_${videoId}_${lang}.mp4`;
+            const driveId = driveFileIds[videoKey];
+            
+            if (driveId) {
+                // use the embed format for google drive videos
+                return `https://drive.google.com/file/d/${driveId}/preview`;
+            } else {
+                console.warn(`no google drive id found for ${videoKey}`);
+                return '';
+            }
+        }
+        
+        // function to extract google drive file id from various url formats
+        function extractDriveFileId(url) {
+            if (!url) return '';
+            
+            // handle '/file/d/ID/view' format
+            let match = url.match(/\/file\/d\/([^\/\?]+)/);
+            if (match) return match[1];
+            
+            // handle 'id=ID' format
+            match = url.match(/id=([^&]+)/);
+            if (match) return match[1];
+            
+            // handle '/open?id=ID' format
+            match = url.match(/open\?id=([^&]+)/);
+            if (match) return match[1];
+            
+            // handle '/uc?id=ID' format
+            match = url.match(/uc\?id=([^&]+)/);
+            if (match) return match[1];
+            
+            // handle '/folders/ID' format
+            match = url.match(/folders\/([^\/\?]+)/);
+            if (match) return match[1];
+            
+            // fallback: return the original url if no pattern matched
+            console.warn(`could not extract drive file id from url: ${url}`);
+            return url;
+        }
+        
+        function createVideoElement(provider, videoId, lang) {
+            const videoPath = getVideoPath(provider, videoId, lang);
+            
+            if (!videoPath) {
+                const errorMessage = document.createElement('p');
+                errorMessage.textContent = 'This video is not available.';
+                return errorMessage;
+            }
+            
+            // Create iframe for Google Drive videos
+            const iframe = document.createElement('iframe');
+            iframe.src = videoPath;
+            iframe.allowFullscreen = true;
+            iframe.dataset.provider = provider;
+            iframe.dataset.videoId = videoId;
+            iframe.dataset.lang = lang;
+            
+            return iframe;
+        }
+        
+        function updateContent() {
+            const languageSelect = document.getElementById('language-select');
+            const videoSelect = document.getElementById('video-select');
+            const contentDiv = document.getElementById('content');
+            const statusMessage = document.getElementById('status-message');
+            
+            const selectedLang = languageSelect.value;
+            const selectedVideoId = videoSelect.value;
+            
+            statusMessage.textContent = `Loading videos for ${selectedLang === 'all' ? 'all languages' : selectedLang}, ${selectedVideoId === 'all' ? 'all videos' : 'video ' + selectedVideoId}...`;
+            
+            // Update evaluation form dropdowns
+            if (selectedLang !== 'all') {
+                document.getElementById('eval-language').value = selectedLang;
+            }
+            
+            if (selectedVideoId !== 'all') {
+                document.getElementById('eval-video-id').value = selectedVideoId;
+            }
+            
+            contentDiv.innerHTML = '';
+            
+            const languageNames = {
+                'es': 'Spanish', 
+                'fr': 'French', 
+                'pt': 'Portuguese', 
+                'de': 'German',
+                'ja': 'Japanese', 
+                'zh': 'Chinese', 
+                'ar': 'Arabic', 
+                'it': 'Italian'
+            };
+            
+            const langsToShow = selectedLang === 'all' ? languages : [selectedLang];
+            
+            langsToShow.forEach(lang => {
+                const langSection = document.createElement('div');
+                langSection.className = 'language-section';
+                
+                const langTitle = document.createElement('h2');
+                langTitle.textContent = `${languageNames[lang]} (${lang})`;
+                langSection.appendChild(langTitle);
+                
+                // Create comparison grid table
+                const table = document.createElement('table');
+                table.className = 'comparison-grid';
+                
+                // Create header row
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+                
+                // Empty cell for the corner
+                const cornerCell = document.createElement('th');
+                cornerCell.textContent = 'Video ID';
+                headerRow.appendChild(cornerCell);
+                
+                // Provider headers
+                providers.forEach(provider => {
+                    const th = document.createElement('th');
+                    th.textContent = provider.replace('_', ' ');
+                    headerRow.appendChild(th);
+                });
+                
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+                
+                // Create table body
+                const tbody = document.createElement('tbody');
+                
+                const vidsToShow = selectedVideoId === 'all' ? videoIds : [parseInt(selectedVideoId)];
+                let hasAnyVideos = false;
+                
+                vidsToShow.forEach(videoId => {
+                    const row = document.createElement('tr');
+                    row.dataset.videoRow = `${lang}-${videoId}`;
+                    
+                    // Video ID cell
+                    const videoIdCell = document.createElement('td');
+                    videoIdCell.textContent = `Video ${videoId}`;
+                    videoIdCell.className = 'video-row-label';
+                    row.appendChild(videoIdCell);
+                    
+                    let hasVideosInRow = false;
+                    
+                    // Provider video cells
+                    providers.forEach(provider => {
+                        const cell = document.createElement('td');
+                        cell.className = 'video-cell';
+                        cell.dataset.provider = provider;
+                        
+                        const video = createVideoElement(provider, videoId, lang);
+                        cell.appendChild(video);
+                        
+                        row.appendChild(cell);
+                        hasVideosInRow = true; // Assume video exists, error handler will hide if not
+                    });
+                    
+                    if (hasVideosInRow) {
+                        tbody.appendChild(row);
+                        hasAnyVideos = true;
+                    }
+                });
+                
+                table.appendChild(tbody);
+                
+                // Only add the table if it has rows
+                if (hasAnyVideos) {
+                    langSection.appendChild(table);
+                    contentDiv.appendChild(langSection);
+                }
+            });
+            
+            // Remove empty sections after videos have had time to load
+            setTimeout(() => {
+                document.querySelectorAll('.language-section').forEach(section => {
+                    const tables = section.querySelectorAll('table');
+                    if (tables.length === 0) {
+                        section.remove();
+                    }
+                });
+            }, 500);
+        }
+        
+        // Sync play/pause functionality
+        document.getElementById('sync-play-btn').addEventListener('click', function() {
+            const visibleVideos = document.querySelectorAll('.comparison-grid iframe');
+            visibleVideos.forEach(video => {
+                if (video.style.display !== 'none') {
+                    video.play();
+                }
+            });
+        });
+        
+        document.getElementById('sync-pause-btn').addEventListener('click', function() {
+            const visibleVideos = document.querySelectorAll('.comparison-grid iframe');
+            visibleVideos.forEach(video => {
+                if (video.style.display !== 'none') {
+                    video.pause();
+                }
+            });
+        });
+        
+        // Update content when selections change
+        document.getElementById('language-select').addEventListener('change', updateContent);
+        document.getElementById('video-select').addEventListener('change', updateContent);
+        
+        // Evaluation form submission
+        document.getElementById('evaluation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const formObj = {};
+            
+            for (const [key, value] of formData.entries()) {
+                formObj[key] = value;
+            }
+            
+            // Add timestamp
+            formObj.timestamp = new Date().toISOString();
+            
+            // Display the collected data (in a real application, you would send this to a server)
+            const formResult = document.getElementById('form-result');
+            const formDataDisplay = document.getElementById('form-data');
+            
+            formDataDisplay.textContent = JSON.stringify(formObj, null, 2);
+            formResult.classList.remove('hidden');
+            
+            // Scroll to the result
+            formResult.scrollIntoView({ behavior: 'smooth' });
+            
+            // In a real application, you would send this data to your server
+            console.log('Form data:', formObj);
+            
+            // Reset the form after successful submission
+            this.reset();
+        });
+        
+        // Initial content load
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded, initializing content...');
+            updateContent();
+        });
+    </script>
+</body>
+</html> 
+
