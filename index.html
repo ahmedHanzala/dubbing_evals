@@ -264,7 +264,7 @@
     <div id="content">
         <!-- Videos will be loaded here -->
     </div>
-
+    
     <!-- <div class="eval-form">
         <h2>evaluation form</h2>
         <p>after watching the videos, please rate each provider on the following criteria:</p>
@@ -306,11 +306,11 @@
                 </select>
             </div>
             
-            <h3>PROVIDER_3</h3>
+            <h3>PROVIDER_2</h3>
             <div class="rating-group">
                 <div class="rating-item">
                     <label>voice quality (1-5):</label>
-                    <select name="PROVIDER_3-voice-quality">
+                    <select name="PROVIDER_2-voice-quality">
                         <option value="5">5 - excellent</option>
                         <option value="4">4 - good</option>
                         <option value="3">3 - average</option>
@@ -322,7 +322,7 @@
                 
                 <div class="rating-item">
                     <label>accent authenticity (1-5):</label>
-                    <select name="PROVIDER_3-accent">
+                    <select name="PROVIDER_2-accent">
                         <option value="5">5 - excellent</option>
                         <option value="4">4 - good</option>
                         <option value="3">3 - average</option>
@@ -334,7 +334,46 @@
                 
                 <div class="rating-item">
                     <label>lip sync (1-5):</label>
-                    <select name="PROVIDER_3-lip-sync">
+                    <select name="PROVIDER_2-lip-sync">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+            </div>
+            
+            <h3>PROVIDER_0</h3>
+            <div class="rating-group">
+                <div class="rating-item">
+                    <label>voice quality (1-5):</label>
+                    <select name="PROVIDER_0-voice-quality">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+                
+                <div class="rating-item">
+                    <label>accent authenticity (1-5):</label>
+                    <select name="PROVIDER_0-accent">
+                        <option value="5">5 - excellent</option>
+                        <option value="4">4 - good</option>
+                        <option value="3">3 - average</option>
+                        <option value="2">2 - poor</option>
+                        <option value="1">1 - very poor</option>
+                        <option value="NA">not available</option>
+                    </select>
+                </div>
+                
+                <div class="rating-item">
+                    <label>lip sync (1-5):</label>
+                    <select name="PROVIDER_0-lip-sync">
                         <option value="5">5 - excellent</option>
                         <option value="4">4 - good</option>
                         <option value="3">3 - average</option>
@@ -384,64 +423,25 @@
                 </div>
             </div>
             
-            <h3>PROVIDER_2</h3>
-            <div class="rating-group">
-                <div class="rating-item">
-                    <label>voice quality (1-5):</label>
-                    <select name="PROVIDER_2-voice-quality">
-                        <option value="5">5 - excellent</option>
-                        <option value="4">4 - good</option>
-                        <option value="3">3 - average</option>
-                        <option value="2">2 - poor</option>
-                        <option value="1">1 - very poor</option>
-                        <option value="NA">not available</option>
-                    </select>
-                </div>
-                
-                <div class="rating-item">
-                    <label>accent authenticity (1-5):</label>
-                    <select name="PROVIDER_2-accent">
-                        <option value="5">5 - excellent</option>
-                        <option value="4">4 - good</option>
-                        <option value="3">3 - average</option>
-                        <option value="2">2 - poor</option>
-                        <option value="1">1 - very poor</option>
-                        <option value="NA">not available</option>
-                    </select>
-                </div>
-                
-                <div class="rating-item">
-                    <label>lip sync (1-5):</label>
-                    <select name="PROVIDER_2-lip-sync">
-                        <option value="5">5 - excellent</option>
-                        <option value="4">4 - good</option>
-                        <option value="3">3 - average</option>
-                        <option value="2">2 - poor</option>
-                        <option value="1">1 - very poor</option>
-                        <option value="NA">not available</option>
-                    </select>
-                </div>
-            </div>
-            
             <div class="form-group">
                 <label>overall ranking (best to worst):</label>
                 <select name="ranking-1" required>
                     <option value="">-- select 1st place --</option>
-                    <option value="PROVIDER_3">PROVIDER_3</option>
-                    <option value="PROVIDER_1">PROVIDER_1</option>
                     <option value="PROVIDER_2">PROVIDER_2</option>
+                    <option value="PROVIDER_0">PROVIDER_0</option>
+                    <option value="PROVIDER_1">PROVIDER_1</option>
                 </select>
                 <select name="ranking-2" required>
                     <option value="">-- select 2nd place --</option>
-                    <option value="PROVIDER_3">PROVIDER_3</option>
-                    <option value="PROVIDER_1">PROVIDER_1</option>
                     <option value="PROVIDER_2">PROVIDER_2</option>
+                    <option value="PROVIDER_0">PROVIDER_0</option>
+                    <option value="PROVIDER_1">PROVIDER_1</option>
                 </select>
                 <select name="ranking-3" required>
                     <option value="">-- select 3rd place --</option>
-                    <option value="PROVIDER_3">PROVIDER_3</option>
-                    <option value="PROVIDER_1">PROVIDER_1</option>
                     <option value="PROVIDER_2">PROVIDER_2</option>
+                    <option value="PROVIDER_0">PROVIDER_0</option>
+                    <option value="PROVIDER_1">PROVIDER_1</option>
                 </select>
             </div>
             
@@ -473,306 +473,394 @@
                 // format: 'provider_video_id_lang': 'driveid'
                 // replace these with your actual google drive file ids
                 // example:
-                'PROVIDER_1_video_0_ar.mp4': '1rYCIeQwTFP7SkEE2r0Z0ALOx1MGUJugV',
-                'PROVIDER_1_video_1_ar.mp4': '1Q5f7wy62ZsJneFdi7h_shXhg-hIsjRmj',
-                'PROVIDER_1_video_2_ar.mp4': '1Hh1BFouiE0MliL68kSW3NTa3tHGiOzXG',
-                'PROVIDER_1_video_3_ar.mp4': '1aXjb88EqQAPo1cWv6pa5q9XIZOVvemnD',
-                'PROVIDER_1_video_4_ar.mp4': '1frdJmy-dHTAGfCAHcaqxfTOTe_EJRPhh',
-                'PROVIDER_1_video_6_ar.mp4': '1flD3iYTcB-299M9th4D16wmej4b7pbR-',
-                'PROVIDER_1_video_7_ar.mp4': '1qUV0eKzEQlVAvXXcfBeH4Q-AYBemRwoF',
-                'PROVIDER_1_video_8_ar.mp4': '18B7shlObylQRovZVbqs2RUEN06kKV8L0',
-                'PROVIDER_2_video_0_ar.mp4': '1qNKkgbPl32C2s1ipP8GOrZZNIocw-uhu',
-                'PROVIDER_2_video_1_ar.mp4': '1tbcqxRP5ZoOg4cBd0ypXbHrd25sw3SjI',
-                'PROVIDER_2_video_2_ar.mp4': '1-o06nnZ34-st_5VETquu_D1lp-B1fvMv',
-                'PROVIDER_2_video_3_ar.mp4': '1_wcPFGgR8shW-agjrnfqZ-PrGZ-14mP7',
-                'PROVIDER_2_video_4_ar.mp4': '1Adr4RrBCumpgxdml-_kChnPwl-Urs0xc',
-                'PROVIDER_2_video_5_ar.mp4': '17KWjtyXpTEwvgfSZX5bxnY-S5f5oYkLI',
-                'PROVIDER_2_video_6_ar.mp4': '1ureKBIQWgtKZTxilj76iEapxN9mpSFA3',
-                'PROVIDER_2_video_7_ar.mp4': '1JSLINn9RJJj97LzTLn0ZbkatKLc5GUU6',
-                'PROVIDER_2_video_8_ar.mp4': '1g823fNA4cNKpoI0qkK_QPCDtBEkI4rB_',
-                'PROVIDER_3_video_0_ar.mp4': '15E6CY7aFwn1EAuauIyKE-yRfAt_qmfIy',
-                'PROVIDER_3_video_1_ar.mp4': '1214L8jWNEGbwhQd2OAwnsqxlgjW7w9Iq',
-                'PROVIDER_3_video_2_ar.mp4': '1NzyH9931p2RaI3EO4g7V3ZKpLD4VcEPr',
-                'PROVIDER_3_video_3_ar.mp4': '1ICVpbtizRiB_ytWAcKvwIY3mvCmMZi1D',
-                'PROVIDER_3_video_4_ar.mp4': '1qljY0Te-yTSvOB2HzK2siRmxRziFy11P',
-                'PROVIDER_3_video_5_ar.mp4': '1013U2wjuusJDWs9t9GmIdfMEV7HV6etW',
-                'PROVIDER_3_video_6_ar.mp4': '1Xrl--iXOGgni7P5KjxzV5yqK-Kb6m8bo',
-                'PROVIDER_3_video_7_ar.mp4': '1_2NLCIVHf1xxJlWOXkQgg1bmuZQtQDux',
-                'PROVIDER_3_video_8_ar.mp4': '1_2NLCIVHf1xxJlWOXkQgg1bmuZQtQDux',
+                'PROVIDER_0_video_0_ar.mp4': '1rYCIeQwTFP7SkEE2r0Z0ALOx1MGUJugV',
+                'PROVIDER_0_video_1_ar.mp4': '1Q5f7wy62ZsJneFdi7h_shXhg-hIsjRmj',
+                'PROVIDER_0_video_2_ar.mp4': '1Hh1BFouiE0MliL68kSW3NTa3tHGiOzXG',
+                'PROVIDER_0_video_3_ar.mp4': '1aXjb88EqQAPo1cWv6pa5q9XIZOVvemnD',
+                'PROVIDER_0_video_4_ar.mp4': '1frdJmy-dHTAGfCAHcaqxfTOTe_EJRPhh',
+                'PROVIDER_0_video_6_ar.mp4': '1flD3iYTcB-299M9th4D16wmej4b7pbR-',
+                'PROVIDER_0_video_7_ar.mp4': '1qUV0eKzEQlVAvXXcfBeH4Q-AYBemRwoF',
+                'PROVIDER_0_video_8_ar.mp4': '18B7shlObylQRovZVbqs2RUEN06kKV8L0',
+                'PROVIDER_1_video_0_ar.mp4': '1qNKkgbPl32C2s1ipP8GOrZZNIocw-uhu',
+                'PROVIDER_1_video_1_ar.mp4': '1tbcqxRP5ZoOg4cBd0ypXbHrd25sw3SjI',
+                'PROVIDER_1_video_2_ar.mp4': '1-o06nnZ34-st_5VETquu_D1lp-B1fvMv',
+                'PROVIDER_1_video_3_ar.mp4': '1_wcPFGgR8shW-agjrnfqZ-PrGZ-14mP7',
+                //'PROVIDER_1_video_4_ar.mp4': '1Adr4RrBCumpgxdml-_kChnPwl-Urs0xc',
+                //'PROVIDER_1_video_5_ar.mp4': '17KWjtyXpTEwvgfSZX5bxnY-S5f5oYkLI',
+                'PROVIDER_1_video_6_ar.mp4': '1ureKBIQWgtKZTxilj76iEapxN9mpSFA3',
+                'PROVIDER_1_video_7_ar.mp4': '1JSLINn9RJJj97LzTLn0ZbkatKLc5GUU6',
+                'PROVIDER_1_video_8_ar.mp4': '1g823fNA4cNKpoI0qkK_QPCDtBEkI4rB_',
+                'PROVIDER_2_video_0_ar.mp4': '15E6CY7aFwn1EAuauIyKE-yRfAt_qmfIy',
+                'PROVIDER_2_video_1_ar.mp4': '1214L8jWNEGbwhQd2OAwnsqxlgjW7w9Iq',
+                'PROVIDER_2_video_2_ar.mp4': '1NzyH9931p2RaI3EO4g7V3ZKpLD4VcEPr',
+                'PROVIDER_2_video_3_ar.mp4': '1ICVpbtizRiB_ytWAcKvwIY3mvCmMZi1D',
+                //'PROVIDER_2_video_4_ar.mp4': '1qljY0Te-yTSvOB2HzK2siRmxRziFy11P',
+                //'PROVIDER_2_video_5_ar.mp4': '1013U2wjuusJDWs9t9GmIdfMEV7HV6etW',
+                'PROVIDER_2_video_6_ar.mp4': '1Xrl--iXOGgni7P5KjxzV5yqK-Kb6m8bo',
+                'PROVIDER_2_video_7_ar.mp4': '1_2NLCIVHf1xxJlWOXkQgg1bmuZQtQDux',
+                'PROVIDER_2_video_8_ar.mp4': '1_2NLCIVHf1xxJlWOXkQgg1bmuZQtQDux',
 
-                'PROVIDER_1_video_0_de.mp4': '1GmwJyZUBJViCuXFEWS2UJU5mKkBO0Dso',
-                'PROVIDER_1_video_1_de.mp4': '1v6HNDSAlE3kd6Qa92T1BYTkg9ycLA6a9',
-                'PROVIDER_1_video_2_de.mp4': '1vawTqcjgpvH7QxpReFbNXPquV_ZoAucO',
-                'PROVIDER_1_video_4_de.mp4': '1JycIr6zdSqMHhCIq-5uxw5BnXw7CwR3v',
-                'PROVIDER_1_video_6_de.mp4': '1oDfooj9SpkPy9_bBvcJZ5MrnoCP9NK32',
-                'PROVIDER_1_video_8_de.mp4': '1wC2oPC6MDH-7U-gLGAv4qD5jA4CpyqoK',
+                'PROVIDER_0_video_0_de.mp4': '1GmwJyZUBJViCuXFEWS2UJU5mKkBO0Dso',
+                'PROVIDER_0_video_1_de.mp4': '1v6HNDSAlE3kd6Qa92T1BYTkg9ycLA6a9',
+                'PROVIDER_0_video_2_de.mp4': '1vawTqcjgpvH7QxpReFbNXPquV_ZoAucO',
+                'PROVIDER_0_video_4_de.mp4': '1JycIr6zdSqMHhCIq-5uxw5BnXw7CwR3v',
+                'PROVIDER_0_video_6_de.mp4': '1oDfooj9SpkPy9_bBvcJZ5MrnoCP9NK32',
+                'PROVIDER_0_video_8_de.mp4': '1wC2oPC6MDH-7U-gLGAv4qD5jA4CpyqoK',
 
-                'PROVIDER_2_video_0_de.mp4': '1xz9evVOfg4Vv6vmWQmsdRlWd6uaJYjhw',
-                'PROVIDER_2_video_2_de.mp4': '1FkcIG7axFBZsqvTzB7ihY72bK6F0nQIW',
-                'PROVIDER_2_video_4_de.mp4': '1HqEgaJHFq16iM1Rqn43HVY87X716RHd-',
-                'PROVIDER_2_video_6_de.mp4': '1xkrO9n_iUt57Hp1kHCL6HHUIaZBRvd8_',
-                'PROVIDER_2_video_7_de.mp4': '1rhs-C-dtaXXFaJw8BA2lDS-rNrno4uAC',
-                'PROVIDER_2_video_8_de.mp4': '1XvhK2mMjsN0ad9Tyi-mu511DboPLXzfV',
+                'PROVIDER_1_video_0_de.mp4': '1xz9evVOfg4Vv6vmWQmsdRlWd6uaJYjhw',
+                'PROVIDER_1_video_2_de.mp4': '1FkcIG7axFBZsqvTzB7ihY72bK6F0nQIW',
+                //'PROVIDER_1_video_4_de.mp4': '1HqEgaJHFq16iM1Rqn43HVY87X716RHd-',
+                'PROVIDER_1_video_6_de.mp4': '1xkrO9n_iUt57Hp1kHCL6HHUIaZBRvd8_',
+                'PROVIDER_1_video_7_de.mp4': '1rhs-C-dtaXXFaJw8BA2lDS-rNrno4uAC',
+                'PROVIDER_1_video_8_de.mp4': '1XvhK2mMjsN0ad9Tyi-mu511DboPLXzfV',
 
-                'PROVIDER_3_video_0_de.mp4': '1IvWABhysgzaoG-sd6bZhfgpcFLrZqQYJ',
-                'PROVIDER_3_video_4_de.mp4': '1unO3_ddBqHZYtztmSlTbzy4x0qCoDi-5',
-                'PROVIDER_3_video_5_de.mp4': '1xZ0Jb8mikjAi4Po0ZFF3_maPbmCLkxo9',
-                'PROVIDER_3_video_6_de.mp4': '1UqDHdHE2nKN-bP6y6H9825A4jA1G6EiO',
-                'PROVIDER_3_video_7_de.mp4': '1RNag2kxZVzxQgm_qkzZ57qNGeFchhPBS',
-                'PROVIDER_3_video_8_de.mp4': '14UROZITC0_XjbTHJsYdmvnBHhjz8fps1',
+                'PROVIDER_2_video_0_de.mp4': '1IvWABhysgzaoG-sd6bZhfgpcFLrZqQYJ',
+                //'PROVIDER_2_video_4_de.mp4': '1unO3_ddBqHZYtztmSlTbzy4x0qCoDi-5',
+                //'PROVIDER_2_video_5_de.mp4': '1xZ0Jb8mikjAi4Po0ZFF3_maPbmCLkxo9',
+                'PROVIDER_2_video_6_de.mp4': '1UqDHdHE2nKN-bP6y6H9825A4jA1G6EiO',
+                'PROVIDER_2_video_7_de.mp4': '1RNag2kxZVzxQgm_qkzZ57qNGeFchhPBS',
+                'PROVIDER_2_video_8_de.mp4': '14UROZITC0_XjbTHJsYdmvnBHhjz8fps1',
 
-                'PROVIDER_3_video_8_de.mp4': '14UROZITC0_XjbTHJsYdmvnBHhjz8fps1',
+                'PROVIDER_2_video_8_de.mp4': '14UROZITC0_XjbTHJsYdmvnBHhjz8fps1',
 
-                'PROVIDER_1_video_0_es.mp4': '1xRYG3YW-QcW_6yGruAaSSyjuit_lzMoE',
-                'PROVIDER_1_video_2_es.mp4': '1Pnjl1LiOoHcWetQwrVD2jtW573VzjrlG',
-                'PROVIDER_1_video_3_es.mp4': '1rG1YrxisddFhwaUCc5tohYBmV8OUA7tl',
-                'PROVIDER_1_video_4_es.mp4': '1UkQ8qi8xA5KKUea-RaAwV_URdEzoL7CC',
-                'PROVIDER_1_video_6_es.mp4': '1dYSnug4rO8Omltxa5rKp6oEVSaib0OfM',
-                'PROVIDER_1_video_8_es.mp4': '1GM3a-mefv5bp2s5R5cXuTWkQJm-oDkOF',
+                'PROVIDER_0_video_0_es.mp4': '1xRYG3YW-QcW_6yGruAaSSyjuit_lzMoE',
+                'PROVIDER_0_video_2_es.mp4': '1Pnjl1LiOoHcWetQwrVD2jtW573VzjrlG',
+                'PROVIDER_0_video_3_es.mp4': '1rG1YrxisddFhwaUCc5tohYBmV8OUA7tl',
+                //'PROVIDER_0_video_4_es.mp4': '1UkQ8qi8xA5KKUea-RaAwV_URdEzoL7CC',
+                'PROVIDER_0_video_6_es.mp4': '1dYSnug4rO8Omltxa5rKp6oEVSaib0OfM',
+                'PROVIDER_0_video_8_es.mp4': '1GM3a-mefv5bp2s5R5cXuTWkQJm-oDkOF',
 
-                'PROVIDER_2_video_0_es.mp4': '1XwYpz1QmQ3ipotIGRwdci9IKbJiBAXPq',
-                'PROVIDER_2_video_2_es.mp4': '1agBdYNUZG8_hCBf49oHn05WgCNWLNsMU',
-                'PROVIDER_2_video_4_es.mp4': '11RKOxy4RmS4jEaWhfdLAIT_niitYrFWx',
-                'PROVIDER_2_video_5_es.mp4': '1joU1DDPznCWl6RnVqF9uS5_MWENSta-J',
-                'PROVIDER_2_video_6_es.mp4': '1iCpjCdfyFz4psJEHJrLF3jMeQmZgZv4D',
-                'PROVIDER_2_video_8_es.mp4': '12JjAwh3VqxZTb2t9rZITcIor7s1CrJx2',
+                'PROVIDER_1_video_0_es.mp4': '1XwYpz1QmQ3ipotIGRwdci9IKbJiBAXPq',
+                'PROVIDER_1_video_2_es.mp4': '1agBdYNUZG8_hCBf49oHn05WgCNWLNsMU',
+                //'PROVIDER_1_video_4_es.mp4': '11RKOxy4RmS4jEaWhfdLAIT_niitYrFWx',
+                //'PROVIDER_1_video_5_es.mp4': '1joU1DDPznCWl6RnVqF9uS5_MWENSta-J',
+                'PROVIDER_1_video_6_es.mp4': '1iCpjCdfyFz4psJEHJrLF3jMeQmZgZv4D',
+                'PROVIDER_1_video_8_es.mp4': '12JjAwh3VqxZTb2t9rZITcIor7s1CrJx2',
 
-                'PROVIDER_3_video_0_es.mp4': '1bNfKsqpXvFz8Duathnr16NkJ81qY0Qu9',
-                'PROVIDER_3_video_2_es.mp4': '1hyeUxKsW_SsyF5PNbSh5sqtLOYJgKSTV',
-                'PROVIDER_3_video_4_es.mp4': '1dk68GRqCp8Y4qaVWUcbn4QIJ42uQzUed',
-                'PROVIDER_3_video_6_es.mp4': '1MrmlOfvQ4QmmY9MNP70hIhK01mvxY9oj',
-                'PROVIDER_3_video_7_es.mp4': '12KvXcx8QOZ0Kgg8aPtgmxJYWiDy5C6sE',
-                'PROVIDER_3_video_8_es.mp4': '1mEmPTSNGMsBFh_RZx-Bv9mzMc8AhRa2N',
+                'PROVIDER_2_video_0_es.mp4': '1bNfKsqpXvFz8Duathnr16NkJ81qY0Qu9',
+                'PROVIDER_2_video_2_es.mp4': '1hyeUxKsW_SsyF5PNbSh5sqtLOYJgKSTV',
+                //'PROVIDER_2_video_4_es.mp4': '1dk68GRqCp8Y4qaVWUcbn4QIJ42uQzUed',
+                'PROVIDER_2_video_6_es.mp4': '1MrmlOfvQ4QmmY9MNP70hIhK01mvxY9oj',
+                'PROVIDER_2_video_7_es.mp4': '12KvXcx8QOZ0Kgg8aPtgmxJYWiDy5C6sE',
+                'PROVIDER_2_video_8_es.mp4': '1mEmPTSNGMsBFh_RZx-Bv9mzMc8AhRa2N',
 
-                'PROVIDER_3_video_7_es.mp4': '12KvXcx8QOZ0Kgg8aPtgmxJYWiDy5C6sE',
-                'PROVIDER_3_video_8_es.mp4': '1mEmPTSNGMsBFh_RZx-Bv9mzMc8AhRa2N',
+                'PROVIDER_2_video_7_es.mp4': '12KvXcx8QOZ0Kgg8aPtgmxJYWiDy5C6sE',
+                'PROVIDER_2_video_8_es.mp4': '1mEmPTSNGMsBFh_RZx-Bv9mzMc8AhRa2N',
 
 
                 
-                'PROVIDER_2_video_7_it.mp4': '1zyaly8BzagLKTN-CO0ApemzVAjNM6NL6',
-                'PROVIDER_2_video_8_it.mp4': '1GHEIJRvfi_ktYv_k7C4yhmLOH8iHMgcH',
+                'PROVIDER_1_video_7_it.mp4': '1zyaly8BzagLKTN-CO0ApemzVAjNM6NL6',
+                'PROVIDER_1_video_8_it.mp4': '1GHEIJRvfi_ktYv_k7C4yhmLOH8iHMgcH',
 
-                'PROVIDER_3_video_0_it.mp4': '1u4DdnnHb4RL8RXCqrENkIIpMANoOxgFn',
-                'PROVIDER_3_video_1_it.mp4': '15POzF1HO-UKcyWQczVPDTQMMm7axrTwX',
-                'PROVIDER_3_video_2_it.mp4': '1xBKyZ0gNwZhEcDDamitl67lNn7c8zR1x',
-                'PROVIDER_3_video_3_it.mp4': '1msSEY3z-7sHenLkeJOhlIq0-USjyHJn1',
-                'PROVIDER_3_video_4_it.mp4': '1HTWz60aAMlNUFfNz03fcVTz9bJ4WwNza',
-                'PROVIDER_3_video_5_it.mp4': '1ua13fRLIopyvLKUq0bnKA83btY6cCBJb',
-                'PROVIDER_3_video_6_it.mp4': '1EoGbUgw54LCGhGuog5FeCaW5F1yL2GGY',
-                'PROVIDER_3_video_7_it.mp4': '1wOMmb11B9Is-C3dqS4gnYRSmB8XwSqVG',
-                'PROVIDER_3_video_8_it.mp4': '191hkiuVhDrON392jENsxkldacl97XPP9',
-
-
-                'PROVIDER_2_video_0_it.mp4': '18nNfax2VHojvAd_QCPKe3YtkxcUJlHrK',
-                'PROVIDER_2_video_1_it.mp4': '1WYeIeyF8yvoZujmYQU8Fl5XN5ZGCMP3Z',
-                'PROVIDER_2_video_2_it.mp4': '1di9hJ9S3u8G20TIEfiSnCpJqPmAWEwXi',
-                'PROVIDER_2_video_3_it.mp4': '1xPX9W6kSHXEbu49RT3aMHjY08wWO6sNB',
-                'PROVIDER_2_video_4_it.mp4': '1f3FNcO6pgUS5-r73I5WoBWMwMT3pbIXb',
-                'PROVIDER_2_video_5_it.mp4': '1WYFtWp3oQeT9H1gXG24CrX3P_aNj7Uvb',
-                'PROVIDER_2_video_6_it.mp4': '1nl335VXu7JDXdvZh2oD4eh6qSu4KDKiu',
-                'PROVIDER_2_video_8_it.mp4': '1GHEIJRvfi_ktYv_k7C4yhmLOH8iHMgcH',
-
-                'PROVIDER_3_video_0_it.mp4': '1u4DdnnHb4RL8RXCqrENkIIpMANoOxgFn',
-                'PROVIDER_3_video_1_it.mp4': '15POzF1HO-UKcyWQczVPDTQMMm7axrTwX',
-                'PROVIDER_3_video_2_it.mp4': '1xBKyZ0gNwZhEcDDamitl67lNn7c8zR1x',
-                'PROVIDER_3_video_3_it.mp4': '1msSEY3z-7sHenLkeJOhlIq0-USjyHJn1',
-                'PROVIDER_3_video_4_it.mp4': '1HTWz60aAMlNUFfNz03fcVTz9bJ4WwNza',
-                'PROVIDER_3_video_5_it.mp4': '1ua13fRLIopyvLKUq0bnKA83btY6cCBJb',
-                'PROVIDER_3_video_6_it.mp4': '1EoGbUgw54LCGhGuog5FeCaW5F1yL2GGY',
-                'PROVIDER_3_video_7_it.mp4': '1wOMmb11B9Is-C3dqS4gnYRSmB8XwSqVG',
-                'PROVIDER_3_video_8_it.mp4': '191hkiuVhDrON392jENsxkldacl97XPP9',
+                'PROVIDER_2_video_0_it.mp4': '1u4DdnnHb4RL8RXCqrENkIIpMANoOxgFn',
+                'PROVIDER_2_video_1_it.mp4': '15POzF1HO-UKcyWQczVPDTQMMm7axrTwX',
+                'PROVIDER_2_video_2_it.mp4': '1xBKyZ0gNwZhEcDDamitl67lNn7c8zR1x',
+                'PROVIDER_2_video_3_it.mp4': '1msSEY3z-7sHenLkeJOhlIq0-USjyHJn1',
+                //'PROVIDER_2_video_4_it.mp4': '1HTWz60aAMlNUFfNz03fcVTz9bJ4WwNza',
+                //'PROVIDER_2_video_5_it.mp4': '1ua13fRLIopyvLKUq0bnKA83btY6cCBJb',
+                'PROVIDER_2_video_6_it.mp4': '1EoGbUgw54LCGhGuog5FeCaW5F1yL2GGY',
+                'PROVIDER_2_video_7_it.mp4': '1wOMmb11B9Is-C3dqS4gnYRSmB8XwSqVG',
+                'PROVIDER_2_video_8_it.mp4': '191hkiuVhDrON392jENsxkldacl97XPP9',
 
 
+                'PROVIDER_1_video_0_it.mp4': '18nNfax2VHojvAd_QCPKe3YtkxcUJlHrK',
+                'PROVIDER_1_video_1_it.mp4': '1WYeIeyF8yvoZujmYQU8Fl5XN5ZGCMP3Z',
+                'PROVIDER_1_video_2_it.mp4': '1di9hJ9S3u8G20TIEfiSnCpJqPmAWEwXi',
+                'PROVIDER_1_video_3_it.mp4': '1xPX9W6kSHXEbu49RT3aMHjY08wWO6sNB',
+                //'PROVIDER_1_video_4_it.mp4': '1f3FNcO6pgUS5-r73I5WoBWMwMT3pbIXb',
+                //'PROVIDER_1_video_5_it.mp4': '1WYFtWp3oQeT9H1gXG24CrX3P_aNj7Uvb',
+                'PROVIDER_1_video_6_it.mp4': '1nl335VXu7JDXdvZh2oD4eh6qSu4KDKiu',
+                'PROVIDER_1_video_8_it.mp4': '1GHEIJRvfi_ktYv_k7C4yhmLOH8iHMgcH',
 
-                'PROVIDER_1_video_0_ja.mp4': '1cJcd-sebybO1JPhNBmd2P-6iFAhIR2Em',
-                'PROVIDER_1_video_1_ja.mp4': '1f6wzJMi8vuYYz1PXAqkr-IliLAbHdPoV',
-                'PROVIDER_1_video_2_ja.mp4': '109R6xomgaFesJrewWxGQ7BAMcFGN_VC_',
-                'PROVIDER_1_video_3_ja.mp4': '1obIAwNCj6R0iQKy1iqH18SqKDx7hz07-',
-                'PROVIDER_1_video_4_ja.mp4': '1peRCY6zvV9JllekS17if3fk5u-3GJXLY',
-                'PROVIDER_1_video_5_ja.mp4': '1qs7TpC4p89CqJyWKw9DtMe3CdBtF9u_q',
-                'PROVIDER_1_video_6_ja.mp4': '17hqF9YFMLMIeSBZwQ4xCsxtWkZ8CLAA_',
-                'PROVIDER_1_video_7_ja.mp4': '1p1sA041ZfQtm-6MMVU32aN8gRXAG3TVH',
-                'PROVIDER_1_video_8_ja.mp4': '1FRWpt905s3MtTwNNx3LUv-vnsIk0vUjF',
-
-                'PROVIDER_2_video_0_ja.mp4': '1JtZU6Ga6wwOhT6GkGExooyjlhfC0I-4E',
-                'PROVIDER_2_video_1_ja.mp4': '1t9ELj9Azx-1gxAeuqZeO24JI6NU3o8yp',
-                'PROVIDER_2_video_2_ja.mp4': '1Onxe5i2oK_NoTUcb_uzVHPEhqxAhtG0_',
-                'PROVIDER_2_video_3_ja.mp4': '1UkAJghJ3sNhtUlRhga2WRVqb88R0BZcP',
-                'PROVIDER_2_video_4_ja.mp4': '1YpAUyQzySJ8yD7X9X29NrYG5UnMsG7ny',
-                'PROVIDER_2_video_5_ja.mp4': '1ikg2YBQXeSA0ekm99XXMBF1v61FvSLb-',
-                'PROVIDER_2_video_6_ja.mp4': '1cJGoUtCfYocJq4mgq41E1hWVgkTiR1vG',
-                'PROVIDER_2_video_7_ja.mp4': '1U3q1QDbLnDBhXhaSb8gdI7Clo01k6HAM',
-                'PROVIDER_2_video_8_ja.mp4': '1RU3BcRlcB3P8HIrmFNBTJMdpcod55f-g',
-
-                'PROVIDER_3_video_0_ja.mp4': '1L-4uj89i6MRV3AFLZKeD7skVa8wKM0rP',
-                'PROVIDER_3_video_1_ja.mp4': '1CIki-oHcPUigQ8tCpp9eBPx84FTLibQq',
-                'PROVIDER_3_video_2_ja.mp4': '1mMdGi0eRtSQL9I_xKv7fxN1BwojSpFqz',
-                'PROVIDER_3_video_3_ja.mp4': '1uauVl6YXyuVQ-XG6fLnpNEIum6TVQvmF',
-                'PROVIDER_3_video_4_ja.mp4': '1oFQsNXUezxjs62RC4uHunKg24lkI6yxR',
-                'PROVIDER_3_video_5_ja.mp4': '1h-dtrEuARukCK6YYTaCTIWBecZFxdGzW',
-                'PROVIDER_3_video_6_ja.mp4': '1wqiiwB8Fm55Uv_eYBDHgtHly8aBaVm5T',
-                'PROVIDER_3_video_7_ja.mp4': '1aMCzNxfSwsMRcXmKUmMO0DRgkfCqBIsC',
-                'PROVIDER_3_video_8_ja.mp4': '1DMhEKxg9QsF-7pDXC3nOj11rLnb9PqrT',
+                'PROVIDER_2_video_0_it.mp4': '1u4DdnnHb4RL8RXCqrENkIIpMANoOxgFn',
+                'PROVIDER_2_video_1_it.mp4': '15POzF1HO-UKcyWQczVPDTQMMm7axrTwX',
+                'PROVIDER_2_video_2_it.mp4': '1xBKyZ0gNwZhEcDDamitl67lNn7c8zR1x',
+                'PROVIDER_2_video_3_it.mp4': '1msSEY3z-7sHenLkeJOhlIq0-USjyHJn1',
+                //'PROVIDER_2_video_4_it.mp4': '1HTWz60aAMlNUFfNz03fcVTz9bJ4WwNza',
+                //'PROVIDER_2_video_5_it.mp4': '1ua13fRLIopyvLKUq0bnKA83btY6cCBJb',
+                'PROVIDER_2_video_6_it.mp4': '1EoGbUgw54LCGhGuog5FeCaW5F1yL2GGY',
+                'PROVIDER_2_video_7_it.mp4': '1wOMmb11B9Is-C3dqS4gnYRSmB8XwSqVG',
+                'PROVIDER_2_video_8_it.mp4': '191hkiuVhDrON392jENsxkldacl97XPP9',
 
 
-                'PROVIDER_1_video_1_pt.mp4': '1VskT2uL68NxNv_H_sVDNG4lsiBmX3TyF',
-                'PROVIDER_1_video_0_pt.mp4': '1GIbDQKz8GS2iyJyZTyLWqlvwc-h4ifPG',
-                'PROVIDER_1_video_2_pt.mp4': '1G-Xn-3kIeFlCW39CwIrhPs-W5GnEOb5D',
-                'PROVIDER_1_video_3_pt.mp4': '1grINkR1HOJbrdQSZ74G9MSII8oKr434D',
 
-                'PROVIDER_1_video_4_pt.mp4': '1Yq0XS0Ac5Cb1YnXjnv7xGATzdLbyV_j5',
+                'PROVIDER_0_video_0_ja.mp4': '1cJcd-sebybO1JPhNBmd2P-6iFAhIR2Em',
+                'PROVIDER_0_video_1_ja.mp4': '1f6wzJMi8vuYYz1PXAqkr-IliLAbHdPoV',
+                'PROVIDER_0_video_2_ja.mp4': '109R6xomgaFesJrewWxGQ7BAMcFGN_VC_',
+                'PROVIDER_0_video_3_ja.mp4': '1obIAwNCj6R0iQKy1iqH18SqKDx7hz07-',
+                'PROVIDER_0_video_4_ja.mp4': '1peRCY6zvV9JllekS17if3fk5u-3GJXLY',
+                'PROVIDER_0_video_5_ja.mp4': '1qs7TpC4p89CqJyWKw9DtMe3CdBtF9u_q',
+                'PROVIDER_0_video_6_ja.mp4': '17hqF9YFMLMIeSBZwQ4xCsxtWkZ8CLAA_',
+                'PROVIDER_0_video_7_ja.mp4': '1p1sA041ZfQtm-6MMVU32aN8gRXAG3TVH',
+                'PROVIDER_0_video_8_ja.mp4': '1FRWpt905s3MtTwNNx3LUv-vnsIk0vUjF',
 
-                'PROVIDER_1_video_5_pt.mp4': '1CHllvMNlAFABzzXL1QrFd7XbPROBHRta',
+                'PROVIDER_1_video_0_ja.mp4': '1JtZU6Ga6wwOhT6GkGExooyjlhfC0I-4E',
+                'PROVIDER_1_video_1_ja.mp4': '1t9ELj9Azx-1gxAeuqZeO24JI6NU3o8yp',
+                'PROVIDER_1_video_2_ja.mp4': '1Onxe5i2oK_NoTUcb_uzVHPEhqxAhtG0_',
+                'PROVIDER_1_video_3_ja.mp4': '1UkAJghJ3sNhtUlRhga2WRVqb88R0BZcP',
+                //'PROVIDER_1_video_4_ja.mp4': '1YpAUyQzySJ8yD7X9X29NrYG5UnMsG7ny',
+                //'PROVIDER_1_video_5_ja.mp4': '1ikg2YBQXeSA0ekm99XXMBF1v61FvSLb-',
+                'PROVIDER_1_video_6_ja.mp4': '1cJGoUtCfYocJq4mgq41E1hWVgkTiR1vG',
+                'PROVIDER_1_video_7_ja.mp4': '1U3q1QDbLnDBhXhaSb8gdI7Clo01k6HAM',
+                'PROVIDER_1_video_8_ja.mp4': '1RU3BcRlcB3P8HIrmFNBTJMdpcod55f-g',
 
-                'PROVIDER_1_video_6_pt.mp4': '1lwqOpl7YZABoz-nqlurFhwZ6ZfgVWOvk',
-
-                'PROVIDER_1_video_7_pt.mp4': '1-Sg0wttdrat2_2ygcXRKpucrVtw52v6t',
-
-                'PROVIDER_1_video_8_pt.mp4': '1G5avAUgxQNN2yyF3O50kDzNwp9KTrgdY',
-
-                'PROVIDER_2_video_0_pt.mp4': '14Mxa4Dd5C7p-wlN5X49_nBNIlFRMKNgI',
-
-                'PROVIDER_2_video_1_pt.mp4': '1oiCm2uTlv_d6UFnEzAkOGEDwLfrurawj',
-
-                'PROVIDER_2_video_2_pt.mp4': '1W8SgRots9U2EYzeC67Mos_UZSZU62NxZ',
-
-                'PROVIDER_2_video_3_pt.mp4': '1lbV3QDWhqIrR9l-bqSxhM1IxyLB12ZCz',
-
-                'PROVIDER_2_video_4_pt.mp4': '1_8gZrzfDFI_yLGveQ8dZ5spJqa-HsL_v',
-
-                'PROVIDER_2_video_5_pt.mp4': '1xGWLXcIRWbWN6qLIGXks82E839HntlhI',
-
-                'PROVIDER_2_video_6_pt.mp4': '1Nr0USr6zHgUg6Ln6lrjJulZKdppZrwwN',
-
-                'PROVIDER_2_video_7_pt.mp4': '1FtDFVYz1bdUYn9HK6yMVjkQfdyHa0gpZ',
-
-                'PROVIDER_2_video_8_pt.mp4': '151wLIs9atf40QLCJZkKYNinb6acBYX2l',
-
-                'PROVIDER_3_video_0_pt.mp4': '1ND9PgHONuXw6slWUlez8lqYiBoJX9NG4',
-
-                'PROVIDER_3_video_1_pt.mp4': '1-k2SNiKtkOI2L0tmZMgztLBHY8k7uUdN',
-
-                'PROVIDER_3_video_2_pt.mp4': '1oNeqnbrzAuEUSclfmpFgJEqsrL2dbhPe',
-
-                'PROVIDER_3_video_3_pt.mp4': '1Vrvk8h64PHVeu-5DJv6b8xEnNuHcJpfb',
-
-                'PROVIDER_3_video_4_pt.mp4': '1YnsDMZgk9__cMyT6LQy5qUcpXKCpUT4D',
-
-                'PROVIDER_3_video_5_pt.mp4': '1u9-K57I6EYZiYy1AbmB5LRhHCE1vwVU1',
-
-                'PROVIDER_3_video_6_pt.mp4': '1Nddu4CCJ5s0fNMuR5-V-7LEMoChjw-zi',
-
-                'PROVIDER_3_video_7_pt.mp4': '15Cg8_eHLqr8FVlt6PSqgsGD0hPvJjrl1',
-
-                'PROVIDER_3_video_8_pt.mp4': '1SWIx396xtYDrYDqE1nvYD_Gq3i5_OGAK',
+                'PROVIDER_2_video_0_ja.mp4': '1L-4uj89i6MRV3AFLZKeD7skVa8wKM0rP',
+                'PROVIDER_2_video_1_ja.mp4': '1CIki-oHcPUigQ8tCpp9eBPx84FTLibQq',
+                'PROVIDER_2_video_2_ja.mp4': '1mMdGi0eRtSQL9I_xKv7fxN1BwojSpFqz',
+                'PROVIDER_2_video_3_ja.mp4': '1uauVl6YXyuVQ-XG6fLnpNEIum6TVQvmF',
+                //'PROVIDER_2_video_4_ja.mp4': '1oFQsNXUezxjs62RC4uHunKg24lkI6yxR',
+                //'PROVIDER_2_video_5_ja.mp4': '1h-dtrEuARukCK6YYTaCTIWBecZFxdGzW',
+                'PROVIDER_2_video_6_ja.mp4': '1wqiiwB8Fm55Uv_eYBDHgtHly8aBaVm5T',
+                'PROVIDER_2_video_7_ja.mp4': '1aMCzNxfSwsMRcXmKUmMO0DRgkfCqBIsC',
+                'PROVIDER_2_video_8_ja.mp4': '1DMhEKxg9QsF-7pDXC3nOj11rLnb9PqrT',
 
 
-                'PROVIDER_1_video_3_zh.mp4': '1ZesH0ykBZ6zUNSPfbsDWT3Fpl_DMpjRP',
+                'PROVIDER_0_video_1_pt.mp4': '1VskT2uL68NxNv_H_sVDNG4lsiBmX3TyF',
+                'PROVIDER_0_video_0_pt.mp4': '1GIbDQKz8GS2iyJyZTyLWqlvwc-h4ifPG',
+                'PROVIDER_0_video_2_pt.mp4': '1G-Xn-3kIeFlCW39CwIrhPs-W5GnEOb5D',
+                'PROVIDER_0_video_3_pt.mp4': '1grINkR1HOJbrdQSZ74G9MSII8oKr434D',
 
-                'PROVIDER_1_video_0_zh.mp4': '16lDf5y8Vw9XbL0inaqE_6gPwFcAjCcXS',
+                'PROVIDER_0_video_4_pt.mp4': '1Yq0XS0Ac5Cb1YnXjnv7xGATzdLbyV_j5',
 
-                'PROVIDER_1_video_1_zh.mp4': '1wiu69IMwQjian2ZwQJue6xxto_Bn_KpS',
+                'PROVIDER_0_video_5_pt.mp4': '1CHllvMNlAFABzzXL1QrFd7XbPROBHRta',
 
-                'PROVIDER_1_video_2_zh.mp4': '1oV170Py9mHNqGNVgVrJ04TAr6M-hwSPw',
+                'PROVIDER_0_video_6_pt.mp4': '1lwqOpl7YZABoz-nqlurFhwZ6ZfgVWOvk',
 
-                'PROVIDER_1_video_4_zh.mp4': '123-gjYYcVTjV-11dj7HEWtKpcGt-Cl8c',
+                'PROVIDER_0_video_7_pt.mp4': '1-Sg0wttdrat2_2ygcXRKpucrVtw52v6t',
 
-                'PROVIDER_1_video_5_zh.mp4': '1wluT2iqKF3AvU9VAKGbJ8b0oXu2db07Y',
+                'PROVIDER_0_video_8_pt.mp4': '1G5avAUgxQNN2yyF3O50kDzNwp9KTrgdY',
 
-                'PROVIDER_1_video_6_zh.mp4': '1n6GDG45qhYuP_oaUVX2jahzh-Ij7ULL_',
+                'PROVIDER_1_video_0_pt.mp4': '14Mxa4Dd5C7p-wlN5X49_nBNIlFRMKNgI',
 
-                'PROVIDER_1_video_7_zh.mp4': '1A1shbU1jgphWHRnEjCPPj7JUlKFTC1b6',
+                'PROVIDER_1_video_1_pt.mp4': '1oiCm2uTlv_d6UFnEzAkOGEDwLfrurawj',
 
-                'PROVIDER_1_video_8_zh.mp4': '1e8uZiYTrtRZ7dTqpBGG5zpHRJH72NJET',
+                'PROVIDER_1_video_2_pt.mp4': '1W8SgRots9U2EYzeC67Mos_UZSZU62NxZ',
 
-                'PROVIDER_2_video_0_zh.mp4': '1lj2KNaSmsK3DaLtBBmBV80eSec_MYlBO',
+                'PROVIDER_1_video_3_pt.mp4': '1lbV3QDWhqIrR9l-bqSxhM1IxyLB12ZCz',
 
-                'PROVIDER_2_video_1_zh.mp4': '1DfAeIGzfcya2YFOwwV6QqHa_SO6AOEC5',
+                //'PROVIDER_1_video_4_pt.mp4': '1_8gZrzfDFI_yLGveQ8dZ5spJqa-HsL_v',
 
-                'PROVIDER_2_video_2_zh.mp4': '1qEODZs8md9FcciIK3BO3ShdZ5nh34J2a',
+                //'PROVIDER_1_video_5_pt.mp4': '1xGWLXcIRWbWN6qLIGXks82E839HntlhI',
 
-                'PROVIDER_2_video_3_zh.mp4': '1DDMK0RMOW_UyBRLk5lRsS9tLhaFPdzjX',
+                'PROVIDER_1_video_6_pt.mp4': '1Nr0USr6zHgUg6Ln6lrjJulZKdppZrwwN',
 
-                'PROVIDER_2_video_4_zh.mp4': '14jBl4OiU2y125FhZXrmKUkbK2xlhaEig',
+                'PROVIDER_1_video_7_pt.mp4': '1FtDFVYz1bdUYn9HK6yMVjkQfdyHa0gpZ',
 
-                'PROVIDER_2_video_5_zh.mp4': '1WqO6sssdhg3wCcJgfLYpL1p7javWfWcG',
+                'PROVIDER_1_video_8_pt.mp4': '151wLIs9atf40QLCJZkKYNinb6acBYX2l',
 
-                'PROVIDER_2_video_6_zh.mp4': '1F_jpyVEsvU1QiLeApIAugxgCEUU9iCFm',
+                'PROVIDER_2_video_0_pt.mp4': '1ND9PgHONuXw6slWUlez8lqYiBoJX9NG4',
 
-                'PROVIDER_2_video_7_zh.mp4': '1FqDck9qMZK5bPWinzGTw3QYofo0wNea_',
+                'PROVIDER_2_video_1_pt.mp4': '1-k2SNiKtkOI2L0tmZMgztLBHY8k7uUdN',
 
-                'PROVIDER_2_video_8_zh.mp4': '1dOAlpdSuz3tDFaCpNHf_VJZn2n3XsOKX',
+                'PROVIDER_2_video_2_pt.mp4': '1oNeqnbrzAuEUSclfmpFgJEqsrL2dbhPe',
 
-                'PROVIDER_3_video_0_zh.mp4': '1Td9EGk6owMCdLrCnzj8DwS1XV75PM36z',
+                'PROVIDER_2_video_3_pt.mp4': '1Vrvk8h64PHVeu-5DJv6b8xEnNuHcJpfb',
 
-                'PROVIDER_3_video_1_zh.mp4': '1ld7xk97uY7N-exMqS1NE2FaiJWG8zNsQ',
+                //'PROVIDER_2_video_4_pt.mp4': '1YnsDMZgk9__cMyT6LQy5qUcpXKCpUT4D',
 
-                'PROVIDER_3_video_2_zh.mp4': '1ReiYk40wNjAJ3CgrPiKded7os0a3imsv',
+                //'PROVIDER_2_video_5_pt.mp4': '1u9-K57I6EYZiYy1AbmB5LRhHCE1vwVU1',
 
-                'PROVIDER_3_video_3_zh.mp4': '1BdqixxDYDcBek21fgO8WQxxD9XeWIC_5',
+                'PROVIDER_2_video_6_pt.mp4': '1Nddu4CCJ5s0fNMuR5-V-7LEMoChjw-zi',
 
-                'PROVIDER_3_video_4_zh.mp4': '1WWxMDl5mB5PqhEq4CIz4iNYzdV29XKK_',
+                'PROVIDER_2_video_7_pt.mp4': '15Cg8_eHLqr8FVlt6PSqgsGD0hPvJjrl1',
 
-                'PROVIDER_3_video_5_zh.mp4': '1J6SFHuhfQ5Gj-p9xROPhMRoIca4tsM74',
+                'PROVIDER_2_video_8_pt.mp4': '1SWIx396xtYDrYDqE1nvYD_Gq3i5_OGAK',
 
-                'PROVIDER_3_video_6_zh.mp4': '1KcwB045wzhuUD70h9gTZqfBJqPOX8nTA',
 
-                'PROVIDER_3_video_7_zh.mp4': '1fL2v6zwRjK8dLJfHdrgfbZgigkF3bAkC',
+                'PROVIDER_0_video_3_zh.mp4': '1ZesH0ykBZ6zUNSPfbsDWT3Fpl_DMpjRP',
 
-                'PROVIDER_3_video_8_zh.mp4': '1UUZ4vRKUfo7L1r2GcsjDNGNf3PDOlwEu',
+                'PROVIDER_0_video_0_zh.mp4': '16lDf5y8Vw9XbL0inaqE_6gPwFcAjCcXS',
 
-                // Italian videos for PROVIDER_1
-                'PROVIDER_1_video_0_it.mp4': '1jpe7cJM7I8fQSLTseFaQY0fgpKy1m146',
-                'PROVIDER_1_video_1_it.mp4': '1Fwo4srgFOgftwMhQos0aZmH0Cdfdnhb5',
-                'PROVIDER_1_video_2_it.mp4': '1jBBppqmgH6hrB39AFv2rhgiX1na40W1A',
-                'PROVIDER_1_video_3_it.mp4': '1ERQo7gy1S9VO_nPDAi_7zp52NVL9UUlm',
-                'PROVIDER_1_video_4_it.mp4': '1GS9GuSWkJURruLhlLVWO5nvMw971lYL5',
-                'PROVIDER_1_video_5_it.mp4': '1dhkO_VlVjSVEQUFH-Gp5sbgN71qKNvWM',
-                'PROVIDER_1_video_6_it.mp4': '1KyjiY-6Yt7Uoakg3iRsmo2jh88k6w3aW',
-                'PROVIDER_1_video_7_it.mp4': '1Fgi3s937-sGZKWSCxnM3HmkEnc7i1p_w',
-                'PROVIDER_1_video_8_it.mp4': '1IXCPsBisr9Ru_tKOUrvDwyb518LqE5is',
+                'PROVIDER_0_video_1_zh.mp4': '1wiu69IMwQjian2ZwQJue6xxto_Bn_KpS',
+
+                'PROVIDER_0_video_2_zh.mp4': '1oV170Py9mHNqGNVgVrJ04TAr6M-hwSPw',
+
+                //'PROVIDER_0_video_4_zh.mp4': '123-gjYYcVTjV-11dj7HEWtKpcGt-Cl8c',
+
+                //'PROVIDER_0_video_5_zh.mp4': '1wluT2iqKF3AvU9VAKGbJ8b0oXu2db07Y',
+
+                'PROVIDER_0_video_6_zh.mp4': '1n6GDG45qhYuP_oaUVX2jahzh-Ij7ULL_',
+
+                'PROVIDER_0_video_7_zh.mp4': '1A1shbU1jgphWHRnEjCPPj7JUlKFTC1b6',
+
+                'PROVIDER_0_video_8_zh.mp4': '1e8uZiYTrtRZ7dTqpBGG5zpHRJH72NJET',
+
+                'PROVIDER_1_video_0_zh.mp4': '1lj2KNaSmsK3DaLtBBmBV80eSec_MYlBO',
+
+                'PROVIDER_1_video_1_zh.mp4': '1DfAeIGzfcya2YFOwwV6QqHa_SO6AOEC5',
+
+                'PROVIDER_1_video_2_zh.mp4': '1qEODZs8md9FcciIK3BO3ShdZ5nh34J2a',
+
+                'PROVIDER_1_video_3_zh.mp4': '1DDMK0RMOW_UyBRLk5lRsS9tLhaFPdzjX',
+
+                //'PROVIDER_1_video_4_zh.mp4': '14jBl4OiU2y125FhZXrmKUkbK2xlhaEig',
+
+                //'PROVIDER_1_video_5_zh.mp4': '1WqO6sssdhg3wCcJgfLYpL1p7javWfWcG',
+
+                'PROVIDER_1_video_6_zh.mp4': '1F_jpyVEsvU1QiLeApIAugxgCEUU9iCFm',
+
+                'PROVIDER_1_video_7_zh.mp4': '1FqDck9qMZK5bPWinzGTw3QYofo0wNea_',
+
+                'PROVIDER_1_video_8_zh.mp4': '1dOAlpdSuz3tDFaCpNHf_VJZn2n3XsOKX',
+
+                'PROVIDER_2_video_0_zh.mp4': '1Td9EGk6owMCdLrCnzj8DwS1XV75PM36z',
+
+                'PROVIDER_2_video_1_zh.mp4': '1ld7xk97uY7N-exMqS1NE2FaiJWG8zNsQ',
+
+                'PROVIDER_2_video_2_zh.mp4': '1ReiYk40wNjAJ3CgrPiKded7os0a3imsv',
+
+                'PROVIDER_2_video_3_zh.mp4': '1BdqixxDYDcBek21fgO8WQxxD9XeWIC_5',
+
+                //'PROVIDER_2_video_4_zh.mp4': '1WWxMDl5mB5PqhEq4CIz4iNYzdV29XKK_',
+
+                //'PROVIDER_2_video_5_zh.mp4': '1J6SFHuhfQ5Gj-p9xROPhMRoIca4tsM74',
+
+                'PROVIDER_2_video_6_zh.mp4': '1KcwB045wzhuUD70h9gTZqfBJqPOX8nTA',
+
+                'PROVIDER_2_video_7_zh.mp4': '1fL2v6zwRjK8dLJfHdrgfbZgigkF3bAkC',
+
+                'PROVIDER_2_video_8_zh.mp4': '1UUZ4vRKUfo7L1r2GcsjDNGNf3PDOlwEu',
+
+                // Italian videos for PROVIDER_0
+                'PROVIDER_0_video_0_it.mp4': '1jpe7cJM7I8fQSLTseFaQY0fgpKy1m146',
+                'PROVIDER_0_video_1_it.mp4': '1Fwo4srgFOgftwMhQos0aZmH0Cdfdnhb5',
+                'PROVIDER_0_video_2_it.mp4': '1jBBppqmgH6hrB39AFv2rhgiX1na40W1A',
+                'PROVIDER_0_video_3_it.mp4': '1ERQo7gy1S9VO_nPDAi_7zp52NVL9UUlm',
+               // 'PROVIDER_0_video_4_it.mp4': '1GS9GuSWkJURruLhlLVWO5nvMw971lYL5',
+               // 'PROVIDER_0_video_5_it.mp4': '1dhkO_VlVjSVEQUFH-Gp5sbgN71qKNvWM',
+                'PROVIDER_0_video_6_it.mp4': '1KyjiY-6Yt7Uoakg3iRsmo2jh88k6w3aW',
+                'PROVIDER_0_video_7_it.mp4': '1Fgi3s937-sGZKWSCxnM3HmkEnc7i1p_w',
+                'PROVIDER_0_video_8_it.mp4': '1IXCPsBisr9Ru_tKOUrvDwyb518LqE5is',
 
                 // Add these French video IDs to the driveFileIds object
-                'PROVIDER_1_video_0_fr.mp4': '1Ke4l6vdCNf6Yle572KR2n8PmZl7hnuPX',
-                'PROVIDER_1_video_1_fr.mp4': '1Uwpv2zba5ULC_mypp0oTVcCmklb5PZOC',
-                'PROVIDER_1_video_2_fr.mp4': '1J04thgGguCxlcoy8Ntadxz8rlaK5XUT3',
-                'PROVIDER_1_video_3_fr.mp4': '1TxSalOFUAkL4GzCfWnaxAWPG2TSvn3K_',
-                'PROVIDER_1_video_4_fr.mp4': '1-AlN3a_rgi_058DefcbCLZDG0WDYxrQZ',
-                'PROVIDER_1_video_5_fr.mp4': '1Hm40sSLt8axTy3MteF_qga04Wudee1b3',
-                'PROVIDER_1_video_6_fr.mp4': '1cYkv4fAOzhgLcoFz66_ad-WgDBJAm88o',
-                'PROVIDER_1_video_7_fr.mp4': '1fRU5DG-HLKTkzbWqkYLaSHzViRflgpB5',
-                'PROVIDER_1_video_8_fr.mp4': '14QUgpRwK45WsOlMrer4ewn1ADEA7VPb1',
+                'PROVIDER_0_video_0_fr.mp4': '1Ke4l6vdCNf6Yle572KR2n8PmZl7hnuPX',
+                'PROVIDER_0_video_1_fr.mp4': '1Uwpv2zba5ULC_mypp0oTVcCmklb5PZOC',
+                'PROVIDER_0_video_2_fr.mp4': '1J04thgGguCxlcoy8Ntadxz8rlaK5XUT3',
+                'PROVIDER_0_video_3_fr.mp4': '1TxSalOFUAkL4GzCfWnaxAWPG2TSvn3K_',
+                //'PROVIDER_0_video_4_fr.mp4': '1-AlN3a_rgi_058DefcbCLZDG0WDYxrQZ',
+                //'PROVIDER_0_video_5_fr.mp4': '1Hm40sSLt8axTy3MteF_qga04Wudee1b3',
+                'PROVIDER_0_video_6_fr.mp4': '1cYkv4fAOzhgLcoFz66_ad-WgDBJAm88o',
+                'PROVIDER_0_video_7_fr.mp4': '1fRU5DG-HLKTkzbWqkYLaSHzViRflgpB5',
+                'PROVIDER_0_video_8_fr.mp4': '14QUgpRwK45WsOlMrer4ewn1ADEA7VPb1',
 
-                'PROVIDER_2_video_0_fr.mp4': '16qxHxcNXxPA_jcDb0qeXuyQHMl152pJR',
-                'PROVIDER_2_video_1_fr.mp4': '1ojez0LzVq41osKg3J2VvubHIu0JBo6BU',
-                'PROVIDER_2_video_2_fr.mp4': '1Dm3vC8AfjCujLkcvdeT_HqKGwK_g7D9_',
-                'PROVIDER_2_video_3_fr.mp4': '1QVg35NPQxH4cXUKN0s51OziYn12Oo_Zi',
-                'PROVIDER_2_video_4_fr.mp4': '1FU9k2T2VmzQCHoxF4-_CAnuA2EbYO5KH',
-                'PROVIDER_2_video_5_fr.mp4': '1tW0ipCXt-hcFP7AeDColss4CFi2hCLud',
-                'PROVIDER_2_video_6_fr.mp4': '1FX3BpGH2w_B7MMYzbQDcAD5x-EYORuMI',
-                'PROVIDER_2_video_7_fr.mp4': '1xBn2HgVo1Hy9OESwf8QHVAoCg96nnXSj',
-                'PROVIDER_2_video_8_fr.mp4': '1eitHQxeNYfckWFbI2lWhmNDEkHVMVp4a',
+                'PROVIDER_1_video_0_fr.mp4': '16qxHxcNXxPA_jcDb0qeXuyQHMl152pJR',
+                'PROVIDER_1_video_1_fr.mp4': '1ojez0LzVq41osKg3J2VvubHIu0JBo6BU',
+                'PROVIDER_1_video_2_fr.mp4': '1Dm3vC8AfjCujLkcvdeT_HqKGwK_g7D9_',
+                'PROVIDER_1_video_3_fr.mp4': '1QVg35NPQxH4cXUKN0s51OziYn12Oo_Zi',
+                //'PROVIDER_1_video_4_fr.mp4': '1FU9k2T2VmzQCHoxF4-_CAnuA2EbYO5KH',
+                //'PROVIDER_1_video_5_fr.mp4': '1tW0ipCXt-hcFP7AeDColss4CFi2hCLud',
+                'PROVIDER_1_video_6_fr.mp4': '1FX3BpGH2w_B7MMYzbQDcAD5x-EYORuMI',
+                'PROVIDER_1_video_7_fr.mp4': '1xBn2HgVo1Hy9OESwf8QHVAoCg96nnXSj',
+                'PROVIDER_1_video_8_fr.mp4': '1eitHQxeNYfckWFbI2lWhmNDEkHVMVp4a',
 
-                'PROVIDER_3_video_0_fr.mp4': '1pn1PiuOze5HwWbYbhAIWY4YzHLwV6-Yw',
-                'PROVIDER_3_video_1_fr.mp4': '1z_N0p1HNacjsaI584JEC7oidFOp48fn_',
-                'PROVIDER_3_video_2_fr.mp4': '1dxImJpa_rf3A0-GpJnmEk5Hg8IlfG9Se',
-                'PROVIDER_3_video_3_fr.mp4': '1ArGEhKIIKkaACPmJQFjQ_PbAYn6CpEAg',
-                'PROVIDER_3_video_4_fr.mp4': '1VV29c6q5uqyXQwVL1g-s2fJW3PG5b5LC',
-                'PROVIDER_3_video_5_fr.mp4': '1Yum9hReCperq1WKObnmp-2hFLItS8f9f',
-                'PROVIDER_3_video_6_fr.mp4': '13g-Rdo9ih4_nNa2ENvAeBCN_eTPXU54A',
-                'PROVIDER_3_video_7_fr.mp4': '1RUxxWNC2wcB-bveOOHaoMN4ZRb8qgAsg',
-                'PROVIDER_3_video_8_fr.mp4': '1nF-j8r1rAAE0jaDO7U6qyXP5S1JNz_zI',
+                'PROVIDER_2_video_0_fr.mp4': '1pn1PiuOze5HwWbYbhAIWY4YzHLwV6-Yw',
+                'PROVIDER_2_video_1_fr.mp4': '1z_N0p1HNacjsaI584JEC7oidFOp48fn_',
+                'PROVIDER_2_video_2_fr.mp4': '1dxImJpa_rf3A0-GpJnmEk5Hg8IlfG9Se',
+                'PROVIDER_2_video_3_fr.mp4': '1ArGEhKIIKkaACPmJQFjQ_PbAYn6CpEAg',
+                //'PROVIDER_2_video_4_fr.mp4': '1VV29c6q5uqyXQwVL1g-s2fJW3PG5b5LC',
+                //'PROVIDER_2_video_5_fr.mp4': '1Yum9hReCperq1WKObnmp-2hFLItS8f9f',
+                'PROVIDER_2_video_6_fr.mp4': '13g-Rdo9ih4_nNa2ENvAeBCN_eTPXU54A',
+                'PROVIDER_2_video_7_fr.mp4': '1RUxxWNC2wcB-bveOOHaoMN4ZRb8qgAsg',
+                'PROVIDER_2_video_8_fr.mp4': '1nF-j8r1rAAE0jaDO7U6qyXP5S1JNz_zI',
 
                 // Add these Spanish video IDs to the driveFileIds object
-                'PROVIDER_1_video_1_es.mp4': '16Vb0xb2i8hGuA0ub9CD4HFrjOP-Wb28Z',
-                'PROVIDER_1_video_5_es.mp4': '1GCbbnUY_s2R_YqI0Tbm03A-yTTeewR0z',
-                'PROVIDER_1_video_7_es.mp4': '1y8OHgeBHggrKzdwSmA0MU_K47Go5I4pH',
-                'PROVIDER_2_video_1_es.mp4': '1RG9bhbKvcgo80JDztvXIwLjLSHDQueBG',
-                'PROVIDER_2_video_3_es.mp4': '16vxOMJ0HCS7XytFEVXoebADB76R8C1CJ',
-                'PROVIDER_2_video_7_es.mp4': '1em09fEqc7Xx4OQQEWlGt3ZRkJDKVuf4f',
-                'PROVIDER_3_video_1_es.mp4': '1qvpDiqKvQbir_NdLX2FfoGrcKz7WSgE0',
-                'PROVIDER_3_video_3_es.mp4': '1Ezw-adV9MOGtAyTVeWWR0Nyo3xmZiIaD',
-                'PROVIDER_3_video_5_es.mp4': '1OgoXR7Jj9UbJfcj7z9OZTpv3DF-BhJaI',
+                'PROVIDER_0_video_1_es.mp4': '16Vb0xb2i8hGuA0ub9CD4HFrjOP-Wb28Z',
+                //'PROVIDER_0_video_5_es.mp4': '1GCbbnUY_s2R_YqI0Tbm03A-yTTeewR0z',
+                'PROVIDER_0_video_7_es.mp4': '1y8OHgeBHggrKzdwSmA0MU_K47Go5I4pH',
+                'PROVIDER_1_video_1_es.mp4': '1RG9bhbKvcgo80JDztvXIwLjLSHDQueBG',
+                'PROVIDER_1_video_3_es.mp4': '16vxOMJ0HCS7XytFEVXoebADB76R8C1CJ',
+                'PROVIDER_1_video_7_es.mp4': '1em09fEqc7Xx4OQQEWlGt3ZRkJDKVuf4f',
+                'PROVIDER_2_video_1_es.mp4': '1qvpDiqKvQbir_NdLX2FfoGrcKz7WSgE0',
+                'PROVIDER_2_video_3_es.mp4': '1Ezw-adV9MOGtAyTVeWWR0Nyo3xmZiIaD',
+                //'PROVIDER_2_video_5_es.mp4': '1OgoXR7Jj9UbJfcj7z9OZTpv3DF-BhJaI',
+
+                // Placeholders for PROVIDER_3 (Arabic)
+                'PROVIDER_3_video_0_ar.mp4': '1bcWDaSjOq3LNOshfo2mkfDSC8EDVv_5m',
+                'PROVIDER_3_video_1_ar.mp4': '1RvmFHGOkDvOscdYALPpAMlXiwEAuZWRU',
+                'PROVIDER_3_video_2_ar.mp4': '1Q1c11dhDmgQTkuCuf8q_7oBImCNiBDcO',
+                'PROVIDER_3_video_3_ar.mp4': '1NMQiyPj2hXNf3MsLAdiZW48JGoLmzQqQ',
+                //'PROVIDER_3_video_4_ar.mp4': '',
+                //'PROVIDER_3_video_5_ar.mp4': '',
+                'PROVIDER_3_video_6_ar.mp4': '1zRJJXvqHKtIOGUfetCUYjnn_fl67NH-t',
+                'PROVIDER_3_video_7_ar.mp4': '14Ew1cDmISgCFTgXEuh_zS3JsJ7TrCRIz',
+                'PROVIDER_3_video_8_ar.mp4': '1aRS47J11gOJHVp4J3iRtv9vopujlxZ1s',
+
+                // Placeholders for PROVIDER_3 (German)
+                'PROVIDER_3_video_0_de.mp4': '14rK5p3EKrbyqOh2TVcz0hWI25E-DZcCX',
+                'PROVIDER_3_video_1_de.mp4': '174gTj9Y9v4UXJYWh3qbbTb24-Ot-bvIJ',
+                'PROVIDER_3_video_2_de.mp4': '1VjiDeISCp3-_WWqOOX-Z6sSSiWYWHGZS',
+                'PROVIDER_3_video_3_de.mp4': '1XxlZZezRX4tlAQQcfTmQdEl6azxQ1REW',
+                //'PROVIDER_3_video_4_de.mp4': '',
+                //'PROVIDER_3_video_5_de.mp4': '',
+                'PROVIDER_3_video_6_de.mp4': '1Ea_0EDBoHc4UMdU5kzLQo7a4NZt6R6JX',
+                'PROVIDER_3_video_7_de.mp4': '1iEPUz2AorVHSYZWxXbkneV8b2gOJN7hk',
+                'PROVIDER_3_video_8_de.mp4': '1qTEEIi9XPwRqlxBKZnP2nhHw3klQcJkE',
+
+                // Placeholders for PROVIDER_3 (Spanish)
+                'PROVIDER_3_video_0_es.mp4': '1h6AgjU0bqiE8AO9m8UE5COtffEW4FDdI',
+                'PROVIDER_3_video_1_es.mp4': '1VaspA6ZYlvdxVfp-SYtsrb0Z8RCZd_4r',
+                'PROVIDER_3_video_2_es.mp4': '1EM23Va3nCxjKL2WUeNpF99bx6qPVeguL',
+                'PROVIDER_3_video_3_es.mp4': '1juIcfgk0PAZT_ZP8qXXcntt9xcEQgqIj',
+                //'PROVIDER_3_video_4_es.mp4': '',
+                //'PROVIDER_3_video_5_es.mp4': '',
+                'PROVIDER_3_video_6_es.mp4': '1WD_RBLOpJb4OzPO-Pd0QWv17Dk8Oeu84',
+                'PROVIDER_3_video_7_es.mp4': '1fSiSVDy0moiRIm9FWWzO0KRVVu0e-Tok',
+                'PROVIDER_3_video_8_es.mp4': '1QcclXJgJAPUOKlApd1eMVwVnqgjU1gwr',
+
+                // Placeholders for PROVIDER_3 (Italian)
+                'PROVIDER_3_video_0_it.mp4': '1vEwNMFzZJzVP4Sl9x1eKPlWYCR9UbyeW',
+                'PROVIDER_3_video_1_it.mp4': '1W78RbxOtctbRan0JG0nBtu5AAiZouHCb',
+                'PROVIDER_3_video_2_it.mp4': '1WH_76au_iExDH7N3BjOxRh4lY5RIjSmM',
+                'PROVIDER_3_video_3_it.mp4': '1P7m7uJZ1fG16SQtF8ZkQby9JOxBS_eGq',
+                //'PROVIDER_3_video_4_it.mp4': '',
+                //'PROVIDER_3_video_5_it.mp4': '',
+                'PROVIDER_3_video_6_it.mp4': '14sRh3C1ERicbfKLo_qNuPJfMtdb_g7ip',
+                'PROVIDER_3_video_7_it.mp4': '1HamX7dAXfEw7Md9ES1KNi9wS5LKUX4N3',
+                'PROVIDER_3_video_8_it.mp4': '1eY1b4pam4SLtzlwPYcWl7YixdxfEr4XY',
+
+                // Placeholders for PROVIDER_3 (Japanese)
+                'PROVIDER_3_video_0_ja.mp4': '1KMmgBm4L4gBRPxKBB-tyHX7mARrrEJRg',
+                'PROVIDER_3_video_1_ja.mp4': '1zQzApMRN44IFT4_dIzVI3UnafJY9YVar',
+                'PROVIDER_3_video_2_ja.mp4': '1oq_oV1SvhBgei4yWe9R1Qb82mXauLYQg',
+                'PROVIDER_3_video_3_ja.mp4': '1v9-ofxs-zVweLg53TGDVZrEHBxRs5ngh',
+                //'PROVIDER_3_video_4_ja.mp4': '',
+                //'PROVIDER_3_video_5_ja.mp4': '',
+                'PROVIDER_3_video_6_ja.mp4': '1Ei6pck16j9efugKbWRQT3x-bgsr4bSXM',
+                'PROVIDER_3_video_7_ja.mp4': '1UPfYUA8LVY-OHaxSH7oS5Ew5a5YnwsM1',
+                'PROVIDER_3_video_8_ja.mp4': '1GrgnWcLxdx6_6Fv_4mEP6tomMYYZGw6F',
+
+                // Placeholders for PROVIDER_3 (Portuguese)
+                'PROVIDER_3_video_0_pt.mp4': '1PvvgmGLDaM6LfkRT4-y6xsIUp0fBTPFs',
+                'PROVIDER_3_video_1_pt.mp4': '19jTg2P1mpVWmUUYV8WjxcT3EkMsy4pB0',
+                'PROVIDER_3_video_2_pt.mp4': '1wZpJLX6MOS2olxGM8ivI1BpsFQIHr5xC',
+                'PROVIDER_3_video_3_pt.mp4': '1BDhmJlqSw-25_i6m7UbjNu9fwAYTigKp',
+                //'PROVIDER_3_video_4_pt.mp4': '',
+                //'PROVIDER_3_video_5_pt.mp4': '',
+                'PROVIDER_3_video_6_pt.mp4': '1fwdGthq-Nt1ZcjUpK_PTdooECjaUOqTl',
+                'PROVIDER_3_video_7_pt.mp4': '1mvsrNj0NqTE8xkJI-zcalVYtMO9jPrc8',
+                'PROVIDER_3_video_8_pt.mp4': '1vpMvJBQTodcSoiCz3DN3AEqmQ1WcXEbT',
+
+                // Placeholders for PROVIDER_3 (Chinese)
+                'PROVIDER_3_video_0_zh.mp4': '1yV_wKpfZVPCZdK8nG3v0Hg69TyDLa0lK',
+                'PROVIDER_3_video_1_zh.mp4': '1Hla7Vc80T7w30RZXmVvHEexZYFbMYq5g',
+                'PROVIDER_3_video_2_zh.mp4': '13Es8yngnnee4QPVYRn76DvdZ5lhgYAxd',
+                'PROVIDER_3_video_3_zh.mp4': '1TvQQqRhpME0eBUAAJWCvE-f1FATEavLw',
+                //'PROVIDER_3_video_4_zh.mp4': '',
+                //'PROVIDER_3_video_5_zh.mp4': '',
+                'PROVIDER_3_video_6_zh.mp4': '18xc4njrho40IeMMwX_JaQMM2yGLF70AF',
+                'PROVIDER_3_video_7_zh.mp4': '1XaYy8q2rpVvv4IxI16qdbX_eA7zo-_pN',
+                'PROVIDER_3_video_8_zh.mp4': '1Wlr3o4tNjNiLKksvakhXuRk4B21RVu0z',
+
+                // Placeholders for PROVIDER_3 (French)
+                'PROVIDER_3_video_0_fr.mp4': '1pMUeoaR6NTYSzQKXxgj_YCO7H0SUbAK6',
+                'PROVIDER_3_video_1_fr.mp4': '19B3223KMTtQxcBQTFcLTy39JRPyTZVCo',
+                'PROVIDER_3_video_2_fr.mp4': '1Wt6Fo3Pjar18_oLEB79CXLczlrH00EyI',
+                'PROVIDER_3_video_3_fr.mp4': '1XrWKWkPrkEccLE9Uanw2XnX90ugwhcDH',
+                //'PROVIDER_3_video_4_fr.mp4': '',
+                //'PROVIDER_3_video_5_fr.mp4': '',
+                'PROVIDER_3_video_6_fr.mp4': '1V_Rv7_01bVLmH5zXPhhd21mBmjp_Nfkv',
+                'PROVIDER_3_video_7_fr.mp4': '1utfgKi6vQjHpjdtS7Xini3-IABZvHLDO',
+                'PROVIDER_3_video_8_fr.mp4': '1EZV0e83yQagqREJNcMQgGzKLf0ZnTV5G',
             };
             
             const videoKey = `${provider}_video_${videoId}_${lang}.mp4`;
@@ -907,16 +995,16 @@
             // Clear existing content
             contentDiv.innerHTML = '';
             
-            const languageNames = {
-                'es': 'Spanish', 
-                'fr': 'French', 
-                'pt': 'Portuguese', 
-                'de': 'German',
-                'ja': 'Japanese', 
-                'zh': 'Chinese', 
-                'ar': 'Arabic', 
-                'it': 'Italian'
-            };
+                    const languageNames = {
+                        'es': 'Spanish', 
+                        'fr': 'French', 
+                        'pt': 'Portuguese', 
+                        'de': 'German',
+                        'ja': 'Japanese', 
+                        'zh': 'Chinese', 
+                        'ar': 'Arabic', 
+                        'it': 'Italian'
+                    };
             
             const langsToShow = [selectedLang];
             
@@ -942,7 +1030,7 @@
                 headerRow.appendChild(cornerCell);
                 
                 // Provider headers
-                providers.forEach(provider => {
+                        providers.forEach(provider => {
                     const th = document.createElement('th');
                     th.textContent = provider.replace('_', ' ');
                     headerRow.appendChild(th);
@@ -1003,7 +1091,7 @@
             const visibleVideos = document.querySelectorAll('.comparison-grid iframe');
             visibleVideos.forEach(video => {
                 if (video.style.display !== 'none') {
-                    video.play();
+                video.play();
                 }
             });
         });
@@ -1012,7 +1100,7 @@
             const visibleVideos = document.querySelectorAll('.comparison-grid iframe');
             visibleVideos.forEach(video => {
                 if (video.style.display !== 'none') {
-                    video.pause();
+                video.pause();
                 }
             });
         });
@@ -1026,7 +1114,7 @@
 
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', (e) => {
-                e.preventDefault();
+            e.preventDefault();
                 const lang = tab.dataset.lang;
                 
                 // Update active tab
